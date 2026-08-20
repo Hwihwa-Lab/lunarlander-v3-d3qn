@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUNAR LANDER DQN | Gymnasium Mission Control</title>
+    <meta name="description" content="Real-time Dueling Double DQN Reinforcement Learning and Flight Simulation Control Deck for Lunar Lander.">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <!-- Top Header Bar -->
+    <header class="header-bar">
+        <div class="brand-group">
+            <div class="brand-icon">🚀</div>
+            <div class="brand-text">
+                <h1>LUNAR LANDER DQN <span class="gym-badge">Gymnasium [Box2D]</span></h1>
+                <div class="brand-sub">env.render("rgb_array") REAL-TIME SIMULATION STREAM</div>
+            </div>
+        </div>
+
+        <div class="header-metrics">
+            <div class="metric-pill" style="color: var(--neon-green);">
+                <span class="status-dot" id="connectionDot"></span>
+                <span id="connectionText">GYM SIMULATION CONNECTED</span>
+            </div>
+            <div class="metric-pill yellow">
+                <span class="label">EPISODE</span>
+                <strong id="hdrEpisode">0 / 1000</strong>
+            </div>
+            <div class="metric-pill purple">
+                <span class="label">EXPLORATION (ε)</span>
+                <strong id="hdrEpsilon">100.0%</strong>
+            </div>
+            <div class="metric-pill green">
+                <span class="label">BEST SCORE</span>
+                <strong id="hdrBestScore">0.0</strong>
+            </div>
+        </div>
+    </header>
+
+    <!-- 3-Column Main Deck Layout -->
+    <main class="main-deck">
+        <!-- LEFT COLUMN: FLIGHT TELEMETRY HUD -->
+        <aside class="deck-card hud-column">
+            <div class="card-hdr">
+                <span class="card-hdr-title">🧭 FLIGHT TELEMETRY HUD</span>
+                <span class="card-hdr-badge" id="teleStateBadge">LIVE STATE</span>
+            </div>
+
+            <!-- ATTITUDE & PITCH GYRO -->
+            <div class="section-subhdr">ATTITUDE & PITCH GYRO</div>
+            <div class="gyro-container">
+                <div class="gyro-circle" id="gyroCircle">
+                    <div class="gyro-ground" id="gyroGround"></div>
+                    <div class="gyro-horizon-line"></div>
+                    <div class="gyro-aim"></div>
+                </div>
+                <div class="gyro-text-group">
+                    <div class="tele-line">
+                        <span class="lbl">PITCH ANGLE</span>
+                        <span class="val" id="telePitch">0.00°</span>
+                    </div>
+                    <div class="tele-line">
+                        <span class="lbl">ANGULAR VEL</span>
+                        <span class="val" id="teleOmega">0.00 rad/s</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VELOCITY VECTORS -->
+            <div class="section-subhdr">VELOCITY VECTORS</div>
+            <div class="gauge-row">
+                <div class="gauge-label-row">
+                    <span class="name">VERTICAL VEL (Vy)</span>
+                    <span class="num" id="valVy">0.00 m/s</span>
+                </div>
+                <div class="gauge-track">
+                    <div class="gauge-bar" id="barVy"></div>
+                </div>
+            </div>
+            <div class="gauge-row">
+                <div class="gauge-label-row">
+                    <span class="name">HORIZONTAL VEL (Vx)</span>
+                    <span class="num" id="valVx">0.00 m/s</span>
+                </div>
+                <div class="gauge-track">
+                    <div class="gauge-bar" id="barVx"></div>
+                </div>
+            </div>
+
+            <!-- COORDINATES & SENSORS -->
+            <div class="section-subhdr">COORDINATES & SENSORS</div>
+            <div class="coords-grid">
+                <div class="coord-box">
+                    <div class="clbl">ALTITUDE (Y)</div>
+                    <div class="cval" id="valAlt">0.000</div>
+                </div>
+                <div class="coord-box">
+                    <div class="clbl">OFFSET (X)</div>
+                    <div class="cval" id="valOffset">0.000</div>
+                </div>
+                <div class="leg-box" id="leftLegBox">
+                    <div class="clbl" style="font-size:0.65rem;">LEFT LEG SENSOR</div>
+                    <div id="leftLegText">NO CONTACT</div>
+                </div>
+                <div class="leg-box" id="rightLegBox">
+                    <div class="clbl" style="font-size:0.65rem;">RIGHT LEG SENSOR</div>
+                    <div id="rightLegText">NO CONTACT</div>
+                </div>
+            </div>
+
+            <!-- DQN ACTION Q-VALUES -->
+            <div class="section-subhdr">DQN ACTION Q-VALUES</div>
+            <div class="q-val-list">
+                <div class="q-val-item" id="qCard0">
+                    <div class="q-val-header">
+                        <span class="q-name">0: IDLE (COAST)</span>
+                        <span class="q-score" id="qScore0">0.00</span>
+                    </div>
+                    <div class="q-bar-track"><div class="q-bar-fill" id="qFill0"></div></div>
+                </div>
+                <div class="q-val-item" id="qCard1">
+                    <div class="q-val-header">
+                        <span class="q-name">1: LEFT THRUSTER</span>
+                        <span class="q-score" id="qScore1">0.00</span>
+                    </div>
+                    <div class="q-bar-track"><div class="q-bar-fill" id="qFill1"></div></div>
+                </div>
+                <div class="q-val-item" id="qCard2">
+                    <div class="q-val-header">
+                        <span class="q-name">2: MAIN THRUSTER</span>
+                        <span class="q-score" id="qScore2">0.00</span>
+                    </div>
+                    <div class="q-bar-track"><div class="q-bar-fill" id="qFill2"></div></div>
+                </div>
+                <div class="q-val-item" id="qCard3">
+                    <div class="q-val-header">
+                        <span class="q-name">3: RIGHT THRUSTER</span>
+                        <span class="q-score" id="qScore3">0.00</span>
+                    </div>
+                    <div class="q-bar-track"><div class="q-bar-fill" id="qFill3"></div></div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- CENTER COLUMN: SIMULATOR VIEW & MISSION CONTROLS -->
+        <section class="center-column">
+            <div class="deck-card sim-card">
+                <div class="card-hdr">
+                    <span class="card-hdr-title">🛸 GYMNASIUM LUNARLANDER-V3 SIMULATION STREAM</span>
+                    <span class="card-hdr-badge" id="simStatusBadge">IN FLIGHT</span>
+                </div>
+
+                <div class="sim-viewport">
+                    <canvas id="flightCanvas"></canvas>
+                    <div class="sim-hud-badge">
+                        <span id="simEpStep">EP: 0 | STEP: 0</span>
+                        <span id="simScoreText" style="color: #fff;">SCORE: 0.0</span>
+                    </div>
+                    <div class="touchdown-banner" id="touchdownBanner">PERFECT LANDING!</div>
+                </div>
+            </div>
+
+            <!-- Control Deck -->
+            <div class="control-deck">
+                <!-- Row 1: Main Action Buttons -->
+                <div class="ctrl-row">
+                    <div class="btn-group">
+                        <button class="btn-ctrl btn-green" id="btnStart">▶ START MISSION</button>
+                        <button class="btn-ctrl btn-orange" id="btnPause">⏸ PAUSE</button>
+                        <button class="btn-ctrl btn-red" id="btnReset">🔄 RESET</button>
+                    </div>
+                    <button class="btn-download" id="btnLoadBest">📥 LOAD BEST MODEL</button>
+                </div>
+
+                <!-- Row 2: Mode Selector & Speed -->
+                <div class="ctrl-row">
+                    <div class="btn-group">
+                        <span style="font-size: 0.8rem; color: var(--text-dim); font-weight: 700;">MODE:</span>
+                        <button class="btn-mode active" data-mode="training" id="modeTrain">⚡ LIVE TRAINING</button>
+                        <button class="btn-mode" data-mode="turbo" id="modeTurbo">⏩ TURBO SPEED</button>
+                        <button class="btn-mode" data-mode="showcase" id="modeShowcase">✨ STYLISH DEMO</button>
+                        <button class="btn-mode" data-mode="manual" id="modeManual">🎮 MANUAL FLIGHT</button>
+                    </div>
+
+                    <div class="btn-group">
+                        <span style="font-size: 0.8rem; color: var(--text-dim); font-weight: 700;">SPEED:</span>
+                        <button class="btn-speed active" data-speed="1.0">1x</button>
+                        <button class="btn-speed" data-speed="2.0">2x</button>
+                        <button class="btn-speed" data-speed="5.0">5x</button>
+                        <button class="btn-speed" data-speed="-1">⚡ MAX</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- RIGHT COLUMN: DQN TRAINING ANALYTICS (3-TIER CHARTS) -->
+        <aside class="deck-card analytics-column">
+            <div class="card-hdr">
+                <span class="card-hdr-title">📈 DQN TRAINING ANALYTICS</span>
+                <span class="card-hdr-badge">LIVE CHARTS</span>
+            </div>
+
+            <!-- 4 Metrics Overview 2x2 Grid -->
+            <div class="stat-cards-grid">
+                <div class="stat-metric-box">
+                    <div class="s-lbl">CURRENT SCORE</div>
+                    <div class="s-val" id="statCurScore">0.0</div>
+                </div>
+                <div class="stat-metric-box">
+                    <div class="s-lbl">SMA 100 AVG</div>
+                    <div class="s-val yellow" id="statSma">0.0</div>
+                </div>
+                <div class="stat-metric-box">
+                    <div class="s-lbl">SUCCESS RATE</div>
+                    <div class="s-val green" id="statSuccess">0.0%</div>
+                </div>
+                <div class="stat-metric-box">
+                    <div class="s-lbl">TRAINING LOSS</div>
+                    <div class="s-val purple" id="statLoss">0.000</div>
+                </div>
+            </div>
+
+            <!-- 3-Tier Multi Charts -->
+            <div class="multi-charts-wrapper">
+                <!-- Chart 1: Reward & 100-MA -->
+                <div class="chart-box">
+                    <div class="chart-title-row">
+                        <strong>EPISODE REWARD & 100-MA (Goal: > 200)</strong>
+                        <span>• Score • SMA 100</span>
+                    </div>
+                    <div class="chart-canvas-box">
+                        <canvas id="rewardChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 2: Epsilon Decay -->
+                <div class="chart-box">
+                    <div class="chart-title-row">
+                        <strong>EPSILON (100% → 5% DECAY)</strong>
+                        <span>• Epsilon ε</span>
+                    </div>
+                    <div class="chart-canvas-box">
+                        <canvas id="epsilonChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 3: MSE Loss Progression -->
+                <div class="chart-box">
+                    <div class="chart-title-row">
+                        <strong>MSE LOSS PROGRESSION</strong>
+                        <span>• MSE Loss</span>
+                    </div>
+                    <div class="chart-canvas-box">
+                        <canvas id="lossChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </main>
+
+    <!-- Scripts -->
+    <script src="/static/js/render.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

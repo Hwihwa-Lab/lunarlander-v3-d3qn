@@ -84,6 +84,7 @@
 - **[`DOCS_UI_DESIGN_SPEC.md`](file:///c:/Users/crack/Lunalander/DOCS_UI_DESIGN_SPEC.md)**: UI/디자인 불변 규격서 (원스크린 3단 덱)
 - **[`DOCS_SYSTEM_ARCHITECTURE.md`](file:///c:/Users/crack/Lunalander/DOCS_SYSTEM_ARCHITECTURE.md)**: 시스템 아키텍처 명세서
 - **[`DOCS_DATA_SCHEMA.md`](file:///c:/Users/crack/Lunalander/DOCS_DATA_SCHEMA.md)**: WebSocket 텔레메트리 및 데이터 스키마
+- **[`DOCS_MODEL_EVALUATION_AND_HF_DEPLOY.md`](file:///c:/Users/crack/Lunalander/DOCS_MODEL_EVALUATION_AND_HF_DEPLOY.md)**: 모델 평가 기준 및 허깅페이스 배포 가이드
 
 ---
 

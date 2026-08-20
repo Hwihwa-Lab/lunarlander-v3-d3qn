@@ -10,6 +10,7 @@ AI는 코드 및 스타일 작성 전, 작업 내용에 맞춰 아래의 문서�
 * **전체 시스템 및 백엔드 아키텍처 파악 시:** `DOCS_SYSTEM_ARCHITECTURE.md` 필수 확인
 * **UI/CSS/HTML 레이아웃 및 디자인 수정 시:** `DOCS_UI_DESIGN_SPEC.md` 필수 확인 (디자인 훼손 방지)
 * **데이터 모델, WebSocket 메시지 규격, API 수정 시:** `DOCS_DATA_SCHEMA.md` 필수 확인
+* **모델 성능 평가, 가중치 관리, 허깅페이스 배포 시:** `DOCS_MODEL_EVALUATION_AND_HF_DEPLOY.md` 필수 확인
 
 ---
 

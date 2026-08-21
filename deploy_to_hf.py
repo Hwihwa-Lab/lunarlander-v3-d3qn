@@ -55,6 +55,14 @@ This repository contains a pre-trained **Dueling Double Deep Q-Network (D3QN)** 
 
 ---
 
+## 📂 Repository Contents
+- `best_model.pth`: Pre-trained PyTorch Dueling Double DQN neural network weights (+311.16 score).
+- `config.json`: Model architecture, hyperparameters, and environment specifications.
+- `dqn_agent.py`: Complete PyTorch source code for `DQNAgent` and `DuelingQNetwork`.
+- `README.md`: Comprehensive model documentation, telemetry specs, and evaluation guide.
+
+---
+
 ## 📊 Environment & Action Space
 
 - **Observation Space (8 Dimensions)**:

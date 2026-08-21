@@ -103,5 +103,6 @@ python dqn_lunalander.py
 
 ---
 
-## 📦 GitHub 저장소
-- **Repository**: [https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn) (Private)
+## 📦 오픈소스 저장소 & 모델 허브
+- **GitHub Repository**: [https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
+- **Hugging Face Model**: [https://huggingface.co/hwihwalab/lunarlander-v3-d3qn](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn)

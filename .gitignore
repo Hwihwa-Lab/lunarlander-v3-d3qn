@@ -36,3 +36,8 @@ wheels/
 *.swo
 .DS_Store
 Thumbs.db
+
+# Temporary & Environment
+scratch/
+.env
+*.env

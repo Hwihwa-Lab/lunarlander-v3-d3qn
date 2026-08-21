@@ -41,10 +41,17 @@ model-index:
       name: Mean Evaluation Reward
 ---
 
-# 🚀 LunarLander-v3 Dueling Double DQN (D3QN) Agent
+# 🚀 LunarLander-v3 D3QN // Mission Control Deck
+
+[![Language: English](https://img.shields.io/badge/Language-English-blue)](README.md)
+[![Language: 한국어](https://img.shields.io/badge/Language-한국어-green)](README_KR.md)
+[![Hugging Face Model Hub](https://img.shields.io/badge/🤗%20Hugging%20Face-Model%20Hub-orange)](https://huggingface.co/{repo_id})
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=flat&logo=github)](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
+[![Gymnasium](https://img.shields.io/badge/Gymnasium-LunarLander--v3-darkgreen)](https://gymnasium.farama.org/environments/box2d/lunar_lander/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-D3QN-red)](https://pytorch.org)
 
 > **Gymnasium Box2D `LunarLander-v3` Reinforcement Learning Agent & Real-time Aerospace Telemetry System**  
-> 🐙 **GitHub Repository**: [https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
+> *[ 🌐 English Documentation ](README.md) | [ 🇰🇷 한국어 매뉴얼 ](README_KR.md)*
 
 This repository contains a pre-trained **Dueling Double Deep Q-Network (D3QN)** agent trained on the [Gymnasium](https://gymnasium.farama.org/environments/box2d/lunar_lander/) `LunarLander-v3` environment.
 
@@ -62,7 +69,8 @@ This repository contains a pre-trained **Dueling Double Deep Q-Network (D3QN)** 
 - `best_model.pth`: Pre-trained PyTorch Dueling Double DQN neural network weights (+311.16 score).
 - `config.json`: Model architecture, hyperparameters, and environment specifications.
 - `dqn_agent.py`: Complete PyTorch source code for `DQNAgent` and `DuelingQNetwork`.
-- `README.md`: Comprehensive model documentation, telemetry specs, and evaluation guide.
+- `README.md`: Global English Model Card and evaluation guide.
+- `README_KR.md`: Full Korean comprehensive manual and telemetry specifications.
 
 ---
 
@@ -265,15 +273,26 @@ def deploy(repo_name: str = "lunarlander-v3-d3qn", private: bool = False, model_
             )
             print("  - [3/4] Uploaded dqn_agent.py (Architecture Source) ✅")
         
-        # Upload README.md (Model Card)
+        # Upload README.md (Global English Model Card)
         api.upload_file(
             path_or_fileobj=str(readme_file),
             path_in_repo="README.md",
             repo_id=repo_id,
             repo_type="model",
-            commit_message="Upload comprehensive Model Card README"
+            commit_message="Upload comprehensive Global English Model Card README"
         )
-        print("  - [4/4] Uploaded README.md (Model Card) ✅")
+        print("  - [4/5] Uploaded README.md (Global English Model Card) ✅")
+
+        # Upload README_KR.md (Korean Manual)
+        if os.path.exists("README_KR.md"):
+            api.upload_file(
+                path_or_fileobj="README_KR.md",
+                path_in_repo="README_KR.md",
+                repo_id=repo_id,
+                repo_type="model",
+                commit_message="Upload comprehensive Korean manual README_KR.md"
+            )
+            print("  - [5/5] Uploaded README_KR.md (Korean Manual) ✅")
         
     except Exception as e:
         print(f"❌ Upload failed: {e}")

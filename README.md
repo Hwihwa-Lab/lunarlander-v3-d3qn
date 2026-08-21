@@ -1,34 +1,55 @@
-# 🚀 Lunar Lander DQN Mission Control Deck v2.0
+# 🚀 LunarLander-v3 D3QN // Mission Control Deck
 
-> **Gymnasium Box2D `LunarLander-v3` Reinforcement Learning Cockpit & Real-time Aerospace Dashboard**  
-> 세련되고 안정적인("간지나는") 착륙을 위한 **Dueling Double DQN (D3QN)** 강화학습 시스템 및 원스크린(One-Screen) 3단 항공우주 관제 덱입니다.
+[![Language: English](https://img.shields.io/badge/Language-English-blue)](README.md)
+[![Language: 한국어](https://img.shields.io/badge/Language-한국어-green)](README_KR.md)
+[![Hugging Face Model Hub](https://img.shields.io/badge/🤗%20Hugging%20Face-Model%20Hub-orange)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn)
+[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=flat&logo=github)](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
+[![Gymnasium](https://img.shields.io/badge/Gymnasium-LunarLander--v3-darkgreen)](https://gymnasium.farama.org/environments/box2d/lunar_lander/)
+[![PyTorch](https://img.shields.io/badge/PyTorch-D3QN-red)](https://pytorch.org)
 
----
+> **Gymnasium Box2D `LunarLander-v3` Reinforcement Learning Cockpit & Real-time Aerospace Telemetry Dashboard**  
+> *[ 🌐 English Documentation ](README.md) | [ 🇰🇷 한국어 매뉴얼 ](README_KR.md)*
 
-## 🌟 핵심 개발 기능 및 아키텍처
-
-### 1. 🧠 Dueling Double DQN (D3QN) 알고리즘
-- **Dueling Architecture**: 상태 가치($V(s)$)와 각 행동 이점($A(s, a)$)을 독립적인 스트림으로 분리하여 학습 수렴성 극대화 ($8 \to 128 \to 128 \to 64 \to 4$)
-- **Double DQN**: 행동 선택(Online Net)과 가치 평가(Target Net)를 분리하여 Q-Value 과대추정(Overestimation) 방지
-- **Robust Optimization**: Soft Target Update ($\tau = 0.001$), Huber Loss (Smooth L1), AdamW, Gradient Clipping 적용
-
-### 2. ✨ 세련된 착륙을 위한 커스텀 리워드 쉐이핑 (`shape_stylish_reward`)
-- **자세 및 회전 억제**: 기체 수평 자세 유지($|\theta| < 0.08$) 및 급격한 회전 방지($|\omega| < 0.1$)
-- **소프트 터치다운**: 지면 근접 시 완벽한 감속($-0.3 \le V_y \le 0.0$) 유도
-- **정중앙 착지 보너스**: 착륙 패드 정중앙 양다리 동시 안착 시 대폭 추가 보상
-
-### 3. 📉 입실론 감쇠 (Epsilon Exploration)
-- **100% 탐색에서 5%로 감쇠**: 초기 $\epsilon = 1.0$ (100%) $\to$ 1,000 에피소드에 걸쳐 $\epsilon = 0.05$ (5%)로 점진 감쇠
+**LunarLander D3QN Mission Control Deck** is an advanced Dueling Double Deep Q-Network (D3QN) reinforcement learning system paired with a zero-scroll, real-time 3-column aerospace telemetry dashboard engineered for high-precision, stylish lunar touchdowns.
 
 ---
 
-## 🖥️ 3단 조종석 관제 덱 (One-Screen Fitted Design)
+## 📊 Model Specifications & Benchmark Results
 
-마우스 휠 스크롤 없이 **1536x762 화면에 100% 꽉 차는 원스크린(No-Scroll) 관제 콘솔**로 구축되었습니다.
+| Parameter | Specification & Achievement |
+| :--- | :--- |
+| **Environment** | Gymnasium Box2D `LunarLander-v3` |
+| **Observation Space** | 8-dimensional continuous state vector ($X, Y, V_x, V_y, \theta, \omega, \text{Leg}_L, \text{Leg}_R$) |
+| **Action Space** | 4 discrete actions (`0: IDLE`, `1: LEFT THRUSTER`, `2: MAIN THRUSTER`, `3: RIGHT THRUSTER`) |
+| **Algorithm** | **Dueling Double Deep Q-Network (D3QN)** with Polyak Target Updates ($\tau = 0.001$) |
+| **Neural Architecture** | Separated Value Stream ($8 \to 128 \to 128 \to 64 \to 1$) + Advantage Stream ($8 \to 128 \to 128 \to 64 \to 4$) with LayerNorm |
+| **Exploration ($\epsilon$)** | $1.0$ (100%) $\to$ $0.05$ (5%) smooth decay schedule |
+| **Official Solved Benchmark** | Average Score $\ge +200.0$ points |
+| **Peak Landing Score Achieved** | **`+311.16 points`** *(Substantially exceeds solved benchmark 🏆)* |
+
+---
+
+## 🌟 Core Algorithmic Highlights
+
+### 1. 🧠 Dueling Double DQN (D3QN) Architecture
+- **Dueling Stream Decomposition**: Decomposes Q-values into state-value $V(s)$ and action advantage $A(s, a)$ to accelerate policy convergence on non-action-critical states.
+- **Double DQN Value Estimation**: Decouples action selection (Online Network) from value estimation (Target Network) to eliminate severe Q-value overestimation bias.
+- **Robust Training Optimization**: Huber Loss (Smooth L1), AdamW optimizer, LayerNorm feature normalization, and gradient clipping.
+
+### 2. ✨ Stylish Landing Custom Reward Shaping (`shape_stylish_reward`)
+- **Attitude & Angular Lock**: Enforces horizontal hull orientation ($|\theta| < 0.08$) and penalizes excessive rotational spin ($|\omega| < 0.1$).
+- **Soft Touchdown Velocity Damping**: Rewards smooth deceleration upon ground proximity ($-0.3 \le V_y \le 0.0$).
+- **Precision Center-Pad Bonus**: Substantial reward incentive for simultaneous dual-leg ground contact directly between landing flags.
+
+---
+
+## 🖥️ 3-Column Mission Control Deck (One-Screen Fitted Design)
+
+Engineered as a **1536x762 zero-scroll, high-density aerospace flight telemetry dashboard** (`overflow: hidden; height: 100vh;`).
 
 ```
 +---------------------------------------------------------------------------------------------+
-| 🚀 HEADER BAR : Brand | EPISODE (0/1000) | EXPLORATION (ε: 100%→5%) | BEST SCORE            |
+| 🚀 HEADER BAR : Brand | EPISODE (0/1000) | EXPLORATION (ε: 100%→5%) | BEST SCORE (+311.16)  |
 +------------------------------+-------------------------------+------------------------------+
 | 👈 LEFT: FLIGHT HUD          | 🛸 CENTER: SIMULATION STREAM  | 👉 RIGHT: TRAINING ANALYTICS |
 | - Attitude & Pitch Gyro      | - High-FPS Apollo 2D Canvas   | - 4 Stats (Score, SMA, etc.) |
@@ -39,70 +60,102 @@
 ```
 
 ### 1) 👈 Left Column: FLIGHT TELEMETRY HUD
-- **인공수평선(Pitch Gyro)**: 자세 각도(`Pitch Angle`) 및 각속도(`Angular Vel`)에 따른 실시간 자이로 회전
-- **속도 벡터 게이지**: 수직 속도($V_y$) 및 수평 속도($V_x$) 실시간 프로그레스 바 (위험 속도 시 색상 경고)
-- **좌표 및 센서**: 고도(Altitude Y), 착륙 오프셋(Offset X), 좌/우 다리 지면 접촉 센서
-- **DQN Action Q-Values**: 4개 행동 실시간 Q값 및 활성화 바 (`0: IDLE`, `1: LEFT THRUSTER`, `2: MAIN THRUSTER`, `3: RIGHT THRUSTER`)
+- **Artificial Horizon (Pitch Gyro)**: Dynamic attitude indicator rotating with vessel pitch angle ($\theta$) and angular velocity ($\omega$).
+- **Velocity Vector Bars**: Real-time vertical ($V_y$) and horizontal ($V_x$) velocity progress meters with caution/danger color thresholds.
+- **Coordinates & Contact Sensors**: Real-time altitude ($Y$), pad offset ($X$), and left/right landing gear contact indicators.
+- **4-Action DQN Q-Values**: Live Q-value bars for `0: IDLE (COAST)`, `1: LEFT THRUSTER`, `2: MAIN THRUSTER`, `3: RIGHT THRUSTER`.
 
-### 2) 🛸 Center Column: SIMULATION STREAM & CONTROLS
-- **실시간 GPU 가속 2D 캔버스**: 아폴로/스페이스X 캡슐 렌더링, 메인/보조 플라즈마 화염 파티클, 네온 비행 궤적 잔상, 달 표면 분화구/깃발, 완벽 착륙 축하 골드 폭죽
-- **통합 제어 버튼**:
+### 2) 🛸 Center Column: SIMULATION STREAM & FLIGHT CONTROLS
+- **Hardware-Accelerated 2D Canvas**: Apollo/SpaceX lander sprite, plasma exhaust particle engines, neon trajectory motion trails, lunar terrain with craters, landing flags, and golden touchdown fireworks.
+- **Integrated Mission Controls**:
   - `[▶ START MISSION]`, `[⏸ PAUSE]`, `[🔄 RESET]`, `[📥 LOAD BEST MODEL]`
-- **4가지 비행 모드**:
-  - `⚡ LIVE TRAINING`: 실시간 강화학습 진행 및 탐색 비행
-  - `⏩ TURBO SPEED`: 렌더링 딜레이를 최소화한 초고속 1000 에피소드 학습
-  - `✨ STYLISH DEMO`: 학습된 최고 지능으로 0% 탐색 완벽 착륙 1회 시연
-  - `🎮 MANUAL FLIGHT`: 키보드로 인간이 직접 우주선을 조종하는 비행 모드
-- **속도 조절**: `1x`, `2x`, `5x`, `⚡ MAX`
+- **4 Flight Operating Modes**:
+  - `⚡ LIVE TRAINING`: Real-time active RL training and exploration flight.
+  - `⏩ TURBO SPEED`: High-speed training with minimal rendering latency.
+  - `✨ STYLISH DEMO`: Zero-exploration ($\epsilon=0.0$) showcase of trained best model.
+  - `🎮 MANUAL FLIGHT`: Human keyboard manual flight simulator.
+- **Speed Multipliers**: `1x`, `2x`, `5x`, `⚡ MAX`.
 
 ### 3) 👉 Right Column: DQN TRAINING ANALYTICS
-- **4대 핵심 지표**: `CURRENT SCORE`, `SMA 100 AVG`, `SUCCESS RATE (%)`, `TRAINING LOSS`
-- **3-Tier 실시간 독립 차트 (Chart.js)**:
-  1. `EPISODE REWARD & 100-MA` (목표 기준선 > 200)
-  2. `EPSILON (100% → 5% DECAY)` (탐색률 감쇠 곡선)
-  3. `MSE LOSS PROGRESSION` (신경망 학습 손실 추이)
+- **4 Real-time Metrics**: `CURRENT SCORE`, `SMA 100 AVG`, `SUCCESS RATE (%)`, `TRAINING LOSS`.
+- **3-Tier Synchronized Multi-Charts (Chart.js)**:
+  1. `EPISODE REWARD & 100-MA` (Solved Threshold: > 200.0)
+  2. `EPSILON (100% → 5% DECAY)` (Exploration decay curve)
+  3. `MSE LOSS PROGRESSION` (Neural network loss trajectory)
 
 ---
 
-## 🎮 키보드 조작 가이드 (`🎮 MANUAL FLIGHT` 모드)
+## 🎮 Manual Flight Controls (`🎮 MANUAL FLIGHT` Mode)
 
-| 키 | 동작 (Action) |
+| Key Binding | Flight Action |
 | :--- | :--- |
-| **`↑` / `W` / `Space`** | **메인 엔진 분사 (MAIN THRUSTER)** - 상승 및 하강 감속 |
-| **`←` / `A`** | **좌측 엔진 분사 (LEFT THRUSTER)** - 우측으로 기울임 |
-| **`→` / `D`** | **우측 엔진 분사 (RIGHT THRUSTER)** - 좌측으로 기울임 |
-| **키를 뗌** | **엔진 정지 (IDLE COAST)** |
+| **`↑` / `W` / `Space`** | **Fire Main Engine Thruster** (Ascend & Decelerate Descent) |
+| **`←` / `A`** | **Fire Left Thruster** (Tilt Right / Move East) |
+| **`→` / `D`** | **Fire Right Thruster** (Tilt Left / Move West) |
+| **Release Key** | **Engine Idle / Free Coast** |
 
 ---
 
-## 🛡️ AI 바이브 코딩 방어 및 문서화 시스템
+## 🚀 Quick Start Guide
 
-본 프로젝트는 무단 디자인 변경 및 데이터 스키마 왜곡을 방지하기 위한 체계적인 문서 규칙을 갖추고 있습니다.
-
-- **[`.cursorrules`](file:///c:/Users/crack/Lunalander/.cursorrules)**: AI Vibe-Coding 방어 규칙 (디자인 보존 및 문서 자동 동기화 의무)
-- **[`DOCS_AI_CODING_PROTOCOL.md`](file:///c:/Users/crack/Lunalander/DOCS_AI_CODING_PROTOCOL.md)**: 마스터 코딩 프로토콜 및 문서 맵핑
-- **[`DOCS_UI_DESIGN_SPEC.md`](file:///c:/Users/crack/Lunalander/DOCS_UI_DESIGN_SPEC.md)**: UI/디자인 불변 규격서 (원스크린 3단 덱)
-- **[`DOCS_SYSTEM_ARCHITECTURE.md`](file:///c:/Users/crack/Lunalander/DOCS_SYSTEM_ARCHITECTURE.md)**: 시스템 아키텍처 명세서
-- **[`DOCS_DATA_SCHEMA.md`](file:///c:/Users/crack/Lunalander/DOCS_DATA_SCHEMA.md)**: WebSocket 텔레메트리 및 데이터 스키마
-- **[`DOCS_MODEL_EVALUATION_AND_HF_DEPLOY.md`](file:///c:/Users/crack/Lunalander/DOCS_MODEL_EVALUATION_AND_HF_DEPLOY.md)**: 모델 평가 기준 및 허깅페이스 배포 가이드
-
----
-
-## 🚀 빠른 시작 가이드
-
-### 1. 원클릭 통합 실행 (권장)
+### 1. Launch Mission Control Dashboard (Recommended)
 ```bash
 python run.py
 ```
-실행 후 브라우저에서 **[http://localhost:8000](http://localhost:8000)**에 접속하시면 즉시 실시간 관제 콘솔을 이용하실 수 있습니다.
+Open your browser and navigate to **[http://localhost:8000](http://localhost:8000)** to access the real-time aerospace control deck.
 
-### 2. CLI 학습만 단독 실행
+### 2. Standalone CLI High-Speed Training
 ```bash
-python dqn_lunalander.py
+python dqn_lunalander.py --cli-train
+```
+
+### 3. Deploy to Hugging Face Model Hub
+```bash
+python deploy_to_hf.py
 ```
 
 ---
 
-## 📦 오픈소스 저장소 & 모델 허브
-- **GitHub Repository**: [https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
-- **Hugging Face Model**: [https://huggingface.co/hwihwalab/lunarlander-v3-d3qn](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn)
+## 💻 Quick Evaluation Snippet
+
+You can load and evaluate this pre-trained agent in 5 lines of Python:
+
+```python
+import torch, gymnasium as gym
+from dqn_agent import DQNAgent
+
+# 1. Initialize environment & agent
+env = gym.make("LunarLander-v3", render_mode="human")
+agent = DQNAgent(state_size=8, action_size=4)
+agent.load("models/best_model.pth")
+
+# 2. Run greedy landing evaluation
+state, _ = env.reset()
+done = False
+while not done:
+    action, _ = agent.act(state, eps=0.0)
+    state, reward, terminated, truncated, _ = env.step(action)
+    done = terminated or truncated
+
+env.close()
+```
+
+---
+
+## 🛡️ AI Vibe-Coding Governance & Documentation Architecture
+
+This repository is strictly protected by automated anti-vibe-coding governance to preserve architecture integrity and prevent regression:
+
+- **[`.cursorrules`](file:///c:/Users/crack/Lunalander/.cursorrules)**: AI Vibe-Coding Defense Master Constitution
+- **[`DOCS_AI_CODING_PROTOCOL.md`](file:///c:/Users/crack/Lunalander/DOCS_AI_CODING_PROTOCOL.md)**: Master Coding Protocol & Document Map
+- **[`DOCS_UI_DESIGN_SPEC.md`](file:///c:/Users/crack/Lunalander/DOCS_UI_DESIGN_SPEC.md)**: UI/UX Invariance Specification (1536x762 One-Screen 3-Column Deck)
+- **[`DOCS_SYSTEM_ARCHITECTURE.md`](file:///c:/Users/crack/Lunalander/DOCS_SYSTEM_ARCHITECTURE.md)**: Full-Stack System Architecture Spec
+- **[`DOCS_DATA_SCHEMA.md`](file:///c:/Users/crack/Lunalander/DOCS_DATA_SCHEMA.md)**: WebSocket Telemetry Protocol & Data Schema
+- **[`DOCS_MODEL_EVALUATION_AND_HF_DEPLOY.md`](file:///c:/Users/crack/Lunalander/DOCS_MODEL_EVALUATION_AND_HF_DEPLOY.md)**: Evaluation Standards & Hugging Face Hub Pipeline
+
+---
+
+## 📦 Open Source Hubs
+
+- 🐙 **GitHub Repository**: [https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
+- 🤗 **Hugging Face Model Hub**: [https://huggingface.co/hwihwalab/lunarlander-v3-d3qn](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn)

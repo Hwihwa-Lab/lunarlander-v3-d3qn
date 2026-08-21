@@ -43,6 +43,9 @@ model-index:
 
 # 🚀 LunarLander-v3 Dueling Double DQN (D3QN) Agent
 
+> **Gymnasium Box2D `LunarLander-v3` Reinforcement Learning Agent & Real-time Aerospace Telemetry System**  
+> 🐙 **GitHub Repository**: [https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
+
 This repository contains a pre-trained **Dueling Double Deep Q-Network (D3QN)** agent trained on the [Gymnasium](https://gymnasium.farama.org/environments/box2d/lunar_lander/) `LunarLander-v3` environment.
 
 ---
@@ -166,7 +169,8 @@ env.close()
 ---
 
 ## 🛠️ Training & Telemetry
-Developed with the **Lunar Lander Mission Control Deck** telemetry system.
+Developed and trained with the [**Lunar Lander Mission Control Deck**](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn) real-time telemetry system.
+- Full Dashboard UI & Source Code: [https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
 """
     return card_content.strip()
 

@@ -103,8 +103,10 @@ class DuelingDQN(nn.Module):
         super().__init__()
         self.feature_network = nn.Sequential(
             nn.Linear(state_dim, 128),
+            nn.LayerNorm(128),
             nn.ReLU(),
             nn.Linear(128, 128),
+            nn.LayerNorm(128),
             nn.ReLU(),
         )
         self.value_stream = nn.Sequential(
@@ -228,7 +230,7 @@ def deploy(repo_name: str = "lunarlander-v3-d3qn", private: bool = False, model_
             repo_type="model",
             commit_message="Upload LunarLander D3QN best model weights"
         )
-        print("  - [1/3] Uploaded best_model.pth ✅")
+        print("  - [1/4] Uploaded best_model.pth ✅")
         
         # Upload config.json
         api.upload_file(
@@ -238,7 +240,18 @@ def deploy(repo_name: str = "lunarlander-v3-d3qn", private: bool = False, model_
             repo_type="model",
             commit_message="Upload model configuration and metadata"
         )
-        print("  - [2/3] Uploaded config.json ✅")
+        print("  - [2/4] Uploaded config.json ✅")
+        
+        # Upload dqn_agent.py (PyTorch architecture source)
+        if os.path.exists("dqn_agent.py"):
+            api.upload_file(
+                path_or_fileobj="dqn_agent.py",
+                path_in_repo="dqn_agent.py",
+                repo_id=repo_id,
+                repo_type="model",
+                commit_message="Upload DQNAgent and DuelingQNetwork PyTorch architecture source"
+            )
+            print("  - [3/4] Uploaded dqn_agent.py (Architecture Source) ✅")
         
         # Upload README.md (Model Card)
         api.upload_file(
@@ -248,7 +261,7 @@ def deploy(repo_name: str = "lunarlander-v3-d3qn", private: bool = False, model_
             repo_type="model",
             commit_message="Upload comprehensive Model Card README"
         )
-        print("  - [3/3] Uploaded README.md (Model Card) ✅")
+        print("  - [4/4] Uploaded README.md (Model Card) ✅")
         
     except Exception as e:
         print(f"❌ Upload failed: {e}")

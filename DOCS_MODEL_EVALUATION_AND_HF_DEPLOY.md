@@ -54,10 +54,13 @@ AI 에이전트는 사용자를 대신하여 훈련 진행 상황을 실시간�
 
 ## 📦 4. 허깅페이스 배포 패키지 구성 (Model Card Artifacts)
 
+- **Task Category (태스크 카테고리)**: **`Reinforcement Learning`** (강화학습)
+- **Library (라이브러리)**: PyTorch, Gymnasium
+
 허깅페이스 레포지토리(Model Hub)에 업로드되는 표준 패키지 구조입니다:
 
 ```
-HuggingFace_Repo/ (예: Hwihwa-Lab/lunarlander-dueling-dqn)
+HuggingFace_Repo/ (예: hwihwalab/lunarlander-v3-d3qn)
 ├── README.md                 # 📄 모델 설명 카드 (하이퍼파라미터, 보상 곡선, 평가 점수)
 ├── best_model.pth            # 🧠 PyTorch Dueling Double DQN 신경망 가중치
 ├── config.json               # ⚙️ 모델 아키텍처 및 하이퍼파라미터 메타데이터
@@ -71,6 +74,9 @@ HuggingFace_Repo/ (예: Hwihwa-Lab/lunarlander-dueling-dqn)
 `huggingface_hub` 라이브러리를 통해 CLI 명령어 또는 Python 스크립트 한 줄로 배포를 완료합니다.
 
 ```bash
-# 예시 실행 명령어 (스크립트 지원 예정)
-python deploy_to_hf.py --repo-id "Hwihwa-Lab/lunarlander-dueling-dqn" --model-path "models/best_model.pth"
+# 1. 공개 저장소(Public)로 원클릭 배포
+python deploy_to_hf.py
+
+# 2. 비공개 저장소(Private)로 배포할 경우
+python deploy_to_hf.py --private
 ```

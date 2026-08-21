@@ -104,4 +104,4 @@ python dqn_lunalander.py
 ---
 
 ## 📦 GitHub 저장소
-- **Repository**: [https://github.com/Hwihwa-Lab/LunarLander-DQN](https://github.com/Hwihwa-Lab/LunarLander-DQN) (Private)
+- **Repository**: [https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn) (Private)

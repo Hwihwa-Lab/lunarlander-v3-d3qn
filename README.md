@@ -5,6 +5,7 @@
 [![Hugging Face Model Hub](https://img.shields.io/badge/🤗%20Hugging%20Face-Model%20Hub-orange)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn)
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=flat&logo=github)](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
 [![Gymnasium](https://img.shields.io/badge/Gymnasium-LunarLander--v3-darkgreen)](https://gymnasium.farama.org/environments/box2d/lunar_lander/)
+[![Algorithm](https://img.shields.io/badge/Algorithm-DQN%20%2F%20D3QN-blueviolet)](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
 [![PyTorch](https://img.shields.io/badge/PyTorch-D3QN-red)](https://pytorch.org)
 
 > **Gymnasium Box2D `LunarLander-v3` Reinforcement Learning Cockpit & Real-time Aerospace Telemetry Dashboard**  

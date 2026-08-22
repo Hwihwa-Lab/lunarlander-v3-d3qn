@@ -19,6 +19,8 @@ def generate_model_card(repo_id: str, best_score: float = None) -> str:
 library_name: gymnasium
 tags:
 - reinforcement-learning
+- dqn
+- d3qn
 - dueling-dqn
 - double-dqn
 - deep-q-network

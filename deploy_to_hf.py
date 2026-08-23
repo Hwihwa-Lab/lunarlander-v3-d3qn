@@ -28,6 +28,7 @@ tags:
 - pytorch
 - aerospace
 pipeline_tag: reinforcement-learning
+license: mit
 model-index:
 - name: {repo_id.split('/')[-1]}
   results:
@@ -49,6 +50,7 @@ model-index:
 [![Language: 한국어](https://img.shields.io/badge/Language-한국어-green)](README_KR.md)
 [![Hugging Face Model Hub](https://img.shields.io/badge/🤗%20Hugging%20Face-Model%20Hub-orange)](https://huggingface.co/{repo_id})
 [![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=flat&logo=github)](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn/blob/main/LICENSE)
 [![Gymnasium](https://img.shields.io/badge/Gymnasium-LunarLander--v3-darkgreen)](https://gymnasium.farama.org/environments/box2d/lunar_lander/)
 [![Algorithm](https://img.shields.io/badge/Algorithm-DQN-blue)](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
 [![PyTorch](https://img.shields.io/badge/PyTorch-D3QN-red)](https://pytorch.org)
@@ -182,6 +184,11 @@ env.close()
 ## 🛠️ Training & Telemetry
 Developed and trained with the [**Lunar Lander Mission Control Deck**](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn) real-time telemetry system.
 - Full Dashboard UI & Source Code: [https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
+
+---
+
+## 📄 License
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn/blob/main/LICENSE) file for details.
 
 ---
 

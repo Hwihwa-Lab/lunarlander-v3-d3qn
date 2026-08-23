@@ -136,3 +136,7 @@ python deploy_to_hf.py
 ## 📦 오픈소스 저장소 & 모델 허브
 - **GitHub Repository**: [https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
 - **Hugging Face Model**: [https://huggingface.co/hwihwalab/lunarlander-v3-d3qn](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn)
+
+---
+
+*Trained and deployed with [LunarLander Mission Control](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) by **hwihwalab**.*

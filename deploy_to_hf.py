@@ -182,6 +182,10 @@ env.close()
 ## 🛠️ Training & Telemetry
 Developed and trained with the [**Lunar Lander Mission Control Deck**](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn) real-time telemetry system.
 - Full Dashboard UI & Source Code: [https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
+
+---
+
+*Trained and deployed with [LunarLander Mission Control](https://huggingface.co/{repo_id}) by **hwihwalab**.*
 """
     return card_content.strip()
 

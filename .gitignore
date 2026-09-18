@@ -41,3 +41,9 @@ Thumbs.db
 scratch/
 .env
 *.env
+# Internal AI & Governance Rules (Private / Secret Sauce)
+.cursorrules
+DOCS_*.md
+MEMORY.md
+.agents/
+.vscode/

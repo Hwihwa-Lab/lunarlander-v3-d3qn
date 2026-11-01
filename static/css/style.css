@@ -101,9 +101,9 @@ body {
 }
 
 .brand-sub {
-  font-size: 0.72rem;
+  font-size: 0.78rem;
   font-family: var(--font-mono);
-  color: var(--text-muted);
+  color: #cbd5e1;
   letter-spacing: 0.04em;
   margin-top: 0.15rem;
 }
@@ -118,6 +118,31 @@ body {
   display: flex;
   align-items: center;
   gap: 0.75rem;
+}
+
+.btn-reload-deck {
+  background: rgba(56, 189, 248, 0.15);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: var(--neon-cyan);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.22rem 0.65rem;
+  border-radius: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  user-select: none;
+}
+.btn-reload-deck:hover {
+  background: rgba(56, 189, 248, 0.3);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+  transform: translateY(-1px);
+}
+.btn-reload-deck:active {
+  transform: translateY(0);
 }
 
 .metric-pill {

@@ -30,11 +30,34 @@ def wait_for_server(url: str, timeout: float = 8.0) -> bool:
     return False
 
 
+def kill_stale_app_window():
+    """Ensure any zombie Chrome window with our temp profile is closed before a new session starts."""
+    try:
+        subprocess.run(
+            'powershell -NoProfile -Command "Get-CimInstance Win32_Process | Where-Object { $_.CommandLine -like \'*lunarlander_app_profile*\' } | ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }"',
+            shell=True,
+            capture_output=True,
+            timeout=3
+        )
+    except Exception:
+        pass
+
+    temp_profile = os.path.join(tempfile.gettempdir(), "lunarlander_app_profile")
+    cache_dir = os.path.join(temp_profile, "Default", "Cache")
+    if os.path.exists(cache_dir):
+        try:
+            shutil.rmtree(cache_dir, ignore_errors=True)
+        except Exception:
+            pass
+
+
 def launch_app_window(url: str):
     """
     Launches Chrome or Edge in standalone maximized App Mode in a completely detached process.
     Forces Windows /MAX flag and isolated user profile for guaranteed wide maximized window (no address bar).
     """
+    kill_stale_app_window()
+
     if not wait_for_server(url):
         print("[Desktop App] Server wait timeout. Attempting launch anyway...")
 

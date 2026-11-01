@@ -189,6 +189,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================================================
     // 5. WebSocket Communication
     // =========================================================================
+    let hasEverConnected = false;
+
     function connectWebSocket() {
         const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
         const wsUrl = `${protocol}//${window.location.host}/ws`;
@@ -196,6 +198,12 @@ document.addEventListener('DOMContentLoaded', () => {
         socket = new WebSocket(wsUrl);
 
         socket.onopen = () => {
+            if (hasEverConnected) {
+                console.log('[WebSocket] Server reconnected. Auto-refreshing deck...');
+                window.location.reload(true);
+                return;
+            }
+            hasEverConnected = true;
             isConnected = true;
             connectionDot.style.background = 'var(--neon-green)';
             connectionText.textContent = 'GYM SIMULATION CONNECTED';
@@ -211,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
             isConnected = false;
             connectionDot.style.background = '#64748b';
             connectionText.textContent = 'RECONNECTING...';
-            setTimeout(connectWebSocket, 2000);
+            setTimeout(connectWebSocket, 1500);
         };
 
         socket.onerror = (err) => {

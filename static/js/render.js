@@ -61,13 +61,24 @@ class LanderRenderer {
         }
     }
 
+    getLanderCenter(x, y) {
+        // Pad top surface is at this.originY - 2.
+        // Lander footpads are at local y = +22 relative to lander center cy.
+        // To place footpads exactly flush on top of the pad when y = 0:
+        // cy = (this.originY - 2) - 22 = this.originY - 24.
+        const cx = this.originX + x * this.scaleX;
+        const groundBaseline = this.originY - 24;
+        const clampedY = Math.max(-0.02, y);
+        const cy = groundBaseline - clampedY * this.scaleY;
+        return { cx, cy };
+    }
+
     updateState(telemetry) {
         if (!telemetry) return;
         this.landerState = { ...this.landerState, ...telemetry };
 
-        // Convert coordinates to canvas
-        const cx = this.originX + this.landerState.x * this.scaleX;
-        const cy = this.originY - this.landerState.y * this.scaleY;
+        // Convert coordinates to canvas with flush-pad ground baseline
+        const { cx, cy } = this.getLanderCenter(this.landerState.x, this.landerState.y);
 
         // Record Trajectory Trail
         this.trail.push({ x: cx, y: cy, time: performance.now() });
@@ -271,8 +282,8 @@ class LanderRenderer {
         ctx.beginPath();
         ctx.moveTo(0, gy);
         // Stylized Moon Surface with subtle craters
-        ctx.bezierCurveTo(this.width * 0.2, gy + 10, this.width * 0.3, gy - 8, this.originX - 70, gy);
-        ctx.lineTo(this.originX + 70, gy);
+        ctx.bezierCurveTo(this.width * 0.2, gy + 10, this.width * 0.3, gy - 8, this.originX - 90, gy);
+        ctx.lineTo(this.originX + 90, gy);
         ctx.bezierCurveTo(this.width * 0.7, gy - 6, this.width * 0.85, gy + 12, this.width, gy);
         ctx.lineTo(this.width, this.height);
         ctx.lineTo(0, this.height);
@@ -284,8 +295,8 @@ class LanderRenderer {
         ctx.lineWidth = 2;
         ctx.stroke();
 
-        // Landing Pad Base (Centered between -0.2 and 0.2 in Gym coordinate, mapped to originX +/- 60)
-        const padW = 100;
+        // Landing Pad Base (Exact match to Gym coordinate [-0.2, 0.2] => padW = 146px)
+        const padW = 146;
         const padX = this.originX - padW / 2;
         const padY = gy - 2;
 
@@ -388,9 +399,7 @@ class LanderRenderer {
 
     drawLander(ctx) {
         const { x, y, angle, left_leg, right_leg, action } = this.landerState;
-
-        const cx = this.originX + x * this.scaleX;
-        const cy = this.originY - y * this.scaleY;
+        const { cx, cy } = this.getLanderCenter(x, y);
 
         ctx.save();
         ctx.translate(cx, cy);
@@ -537,8 +546,7 @@ class LanderRenderer {
 
     drawHUD(ctx) {
         const { x, y, vx, vy, angle } = this.landerState;
-        const cx = this.originX + x * this.scaleX;
-        const cy = this.originY - y * this.scaleY;
+        const { cx, cy } = this.getLanderCenter(x, y);
 
         ctx.save();
         // Target Alignment Crosshair Line down to Pad
@@ -548,7 +556,7 @@ class LanderRenderer {
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(cx, cy + 25);
-            ctx.lineTo(cx, this.originY);
+            ctx.lineTo(cx, this.originY - 2);
             ctx.stroke();
             ctx.setLineDash([]);
         }

@@ -536,6 +536,7 @@ body {
   text-transform: uppercase;
 }
 .touchdown-banner.crash { background: rgba(239, 68, 68, 0.92); border-color: #fca5a5; }
+.touchdown-banner.warn { background: rgba(245, 158, 11, 0.92); border-color: #fde68a; box-shadow: 0 0 25px rgba(245, 158, 11, 0.8); }
 .touchdown-banner.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 
 /* Control Panel */

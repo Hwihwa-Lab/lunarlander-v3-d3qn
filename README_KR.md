@@ -78,7 +78,7 @@ model-index:
 
 # 🚀 LunarLander-v3 D3QN // Mission Control Deck v2.0
 
-[![Language: English](https://img.shields.io/badge/Language-English-007ACC)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![Language: 한국어](https://img.shields.io/badge/Language-한국어-7cb342)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn/blob/main/README_KR.md) [![Hugging Face Model Hub](https://img.shields.io/badge/🤗%20Model%20Hub-LunarLander--D3QN-orange)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![🏎️ 후속 연구: Roadster D3QN](https://img.shields.io/badge/진화모델-Roadster%20D3QN-purple)](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn) [![🎯 후속 연구: Roadster PPO](https://img.shields.io/badge/진화모델-Roadster%20PPO-orange)](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-ppo) [![GitHub](https://img.shields.io/badge/GitHub-Hwihwa--Lab-181717?logo=github)](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn/blob/main/LICENSE)
+[![Language: English](https://img.shields.io/badge/Language-English-007ACC)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![Language: 한국어](https://img.shields.io/badge/Language-한국어-7cb342)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn/blob/main/README_KR.md) [![🤗 실시간 인터랙티브 관제덱](https://img.shields.io/badge/🤗%20Live%20Space-Mission%20Control-blue)](https://huggingface.co/spaces/hwihwalab/lunarlander-v3-d3qn) [![Hugging Face Model Hub](https://img.shields.io/badge/🤗%20Model%20Hub-LunarLander--D3QN-orange)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![🏎️ 후속 연구: Roadster D3QN](https://img.shields.io/badge/진화모델-Roadster%20D3QN-purple)](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn) [![🎯 후속 연구: Roadster PPO](https://img.shields.io/badge/진화모델-Roadster%20PPO-orange)](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-ppo) [![GitHub](https://img.shields.io/badge/GitHub-Hwihwa--Lab-181717?logo=github)](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn/blob/main/LICENSE)
 
 [![PyTorch](https://img.shields.io/badge/PyTorch-D3QN-red)](https://pytorch.org) [![Gymnasium](https://img.shields.io/badge/Gymnasium-v1.0-darkgreen)](https://gymnasium.farama.org/environments/box2d/lunar_lander/) [![Benchmark](https://img.shields.io/badge/공식성공점수-%2B311.16점%20(기준%20압도적%20초과)-10B981)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![Aerodynamics](https://img.shields.io/badge/물리역학-6--DoF%20달중력%20%26%20RCS-E11D48)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![Telemetry](https://img.shields.io/badge/텔레메트리-실시간%20웹소켓%2050Hz-06B6D4)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![Research Lab](https://img.shields.io/badge/연구개발-Hwihwa%20Lab-d0f991?labelColor=050807)](https://github.com/Hwihwa-Lab)
 
@@ -87,7 +87,7 @@ model-index:
 >  
 > 🏛️ **원천 연구 베이스라인 (Foundational Baseline)**: 본 프로젝트는 Hwihwa Lab의 상위 항공우주 제어 연구인 [테슬라 로드스터 180° 공중 전복 복구 플립 착륙 (D3QN & PPO)](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn)의 핵심 알고리즘 및 물리적 모태가 되는 원천 연구입니다.  
 >  
-> 🌐 [English Documentation](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) | 🇰🇷 [한국어 매뉴얼](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn/blob/main/README_KR.md) | 🏎️ [Roadster D3QN](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn) | 🎯 [Roadster PPO](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-ppo)”  
+> 🌐 [실시간 라이브 관제덱 (Space)](https://huggingface.co/spaces/hwihwalab/lunarlander-v3-d3qn) | 📦 [Model Hub (가중치)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) | 🇰🇷 [한국어 매뉴얼](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn/blob/main/README_KR.md) | 🏎️ [Roadster D3QN](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn) | 🎯 [Roadster PPO](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-ppo)”  
 > *Developed by [Hwihwa Lab](https://github.com/Hwihwa-Lab) · AI × Automation × Aesthetics ✨*
 
 세련되고 안정적인("간지나는") 착륙을 위한 **Dueling Double DQN (D3QN)** 강화학습 시스템 및 원스크린(One-Screen) 3단 항공우주 관제 덱입니다.
@@ -132,13 +132,14 @@ model-index:
 
 ```
 +---------------------------------------------------------------------------------------------+
-| 🚀 HEADER BAR : Brand | EPISODE (0/1000) | EXPLORATION (ε: 100%→5%) | BEST SCORE            |
+| 🚀 HEADER BAR : Brand | EPISODE (0/1000) | EXPLORATION (ε: 100%→5%) | BEST SCORE (+311.16)  |
 +------------------------------+-------------------------------+------------------------------+
 | 👈 LEFT: FLIGHT HUD          | 🛸 CENTER: SIMULATION STREAM  | 👉 RIGHT: TRAINING ANALYTICS |
 | - Attitude & Pitch Gyro      | - High-FPS Apollo 2D Canvas   | - 4 Stats (Score, SMA, etc.) |
 | - Velocity Gauges (Vy, Vx)   | - Mission Control Action Deck | - Chart 1: Reward & 100-MA   |
-| - Coordinates & Leg Sensors  | - 4 Mode Tabs & Speed Control | - Chart 2: Epsilon Decay     |
-| - 4-Action DQN Q-Values      | - Touchdown / Crash Banner    | - Chart 3: MSE Loss Progress |
+| - Coordinates & Leg Sensors  | - Autopilot / Manual / Train  | - Chart 2: Epsilon Decay     |
+| - 4-Action DQN Q-Values      | - Time Warp Speed Multipliers | - Chart 3: MSE Loss Progress |
+| - Mission Avionics Specs     | - Strict Quality Tiers Banner | - D3QN Architecture Specs    |
 +------------------------------+-------------------------------+------------------------------+
 ```
 
@@ -147,24 +148,31 @@ model-index:
 - **속도 벡터 게이지**: 수직 속도($V_y$) 및 수평 속도($V_x$) 실시간 프로그레스 바 (위험 속도 시 색상 경고)
 - **좌표 및 센서**: 고도(Altitude Y), 착륙 오프셋(Offset X), 좌/우 다리 지면 접촉 센서
 - **DQN Action Q-Values**: 4개 행동 실시간 Q값 및 활성화 바 (`0: IDLE`, `1: LEFT THRUSTER`, `2: MAIN THRUSTER`, `3: RIGHT THRUSTER`)
+- **MISSION AVIONICS & SENSORS 스펙 카드**: 관성측정장치(IMU), 라이다 고도계(LIDAR), 극저온 솔레노이드 밸브 등 하드웨어 텔레메트리 제원
 
 ### 2) 🛸 Center Column: SIMULATION STREAM & CONTROLS
-- **실시간 GPU 가속 2D 캔버스**: 아폴로/스페이스X 캡슐 렌더링, 메인/보조 플라즈마 화염 파티클, 네온 비행 궤적 잔상, 달 표면 분화구/깃발, 완벽 착륙 축하 골드 폭죽
+- **실시간 GPU 가속 2D 캔버스**: 아폴로/스페이스X 캡슐 렌더링, 메인/보조 플라즈마 화염 파티클, 네온 비행 궤적 잔상, 물리 좌표와 100% 일치하는 달 표면 착륙 패드 및 깃발($|X| \le 0.20$), 골드 축하 폭죽
 - **통합 제어 버튼**:
-  - `[▶ START MISSION]`, `[⏸ PAUSE]`, `[🔄 RESET]`, `[📥 LOAD BEST MODEL]`
-- **4가지 비행 모드**:
-  - `⚡ LIVE TRAINING`: 실시간 강화학습 진행 및 탐색 비행
-  - `⏩ TURBO SPEED`: 렌더링 딜레이를 최소화한 초고속 1000 에피소드 학습
-  - `✨ STYLISH DEMO`: 학습된 최고 지능으로 0% 탐색 완벽 착륙 1회 시연
-  - `🎮 MANUAL FLIGHT`: 키보드로 인간이 직접 우주선을 조종하는 비행 모드
-- **속도 조절**: `1x`, `2x`, `5x`, `⚡ MAX`
+  - `[▶ START MISSION]`: 클릭 즉시 테슬라 로드스터와 동일하게 학습 완료된 최적 지능으로 무한 연속 자율 착륙 비행(Autopilot) 수행
+  - `[⏸ PAUSE]`, `[🔄 RESET]`, `[📥 LOAD BEST MODEL]`
+- **3대 통합 비행 운용 모드**:
+  - `🤖 AUTOPILOT (DEMO)` *(기본값)*: 검증된 30개 미션 시드를 순환하며 사전 학습된 최고 모델($\epsilon=0.0$)로 100% 성공률의 완벽 정중앙 착륙을 무한 연속 시연 (착륙 후 1.2초 축하 대기 후 다음 비행 자동 진입)
+  - `🎮 MANUAL FLIGHT`: 키보드(`W`/`A`/`D`, 방향키, 스페이스바)로 조종사가 직접 착륙을 제어하는 인간 수동 비행
+  - `⚡ LIVE TRAINING`: 실시간 입실론 감쇠($1.0 \to 0.05$) 및 경험 리플레이 가중치 업데이트가 동반되는 실전 강화학습
+- **시간 왜곡 배속 제어**: `1x`, `2x`, `5x`, `⚡ MAX`
+- **정밀 착륙 품질 판정 시스템 (오인 판정 0% 방어)**:
+  - `PERFECT SOFT TOUCHDOWN! 🏆`: 깃발 정중앙($|X| \le 0.08$), 초저속 감속($|V_y| \le 0.35$), 양다리 동시 안착
+  - `TOUCHDOWN SUCCESS! 🎉`: 착륙 패드 깃발 내부 안착($|X| \le 0.20$), 안전 수직 속도($|V_y| \le 0.55$), 다리 센서 접촉
+  - `OFF-PAD LANDING (OUT OF BOUNDS) ⚠️`: 선체 충돌 없이 서서 멈췄으나 깃발 바깥 거친 암반에 착지한 경우 (패드 이탈 경고)
+  - `CRASH DETECTED 💥`: 착지 속도 초과, 기체 전복, 선체 직접 충돌
 
 ### 3) 👉 Right Column: DQN TRAINING ANALYTICS
 - **4대 핵심 지표**: `CURRENT SCORE`, `SMA 100 AVG`, `SUCCESS RATE (%)`, `TRAINING LOSS`
 - **3-Tier 실시간 독립 차트 (Chart.js)**:
-  1. `EPISODE REWARD & 100-MA` (목표 기준선 > 200)
+  1. `EPISODE REWARD & 100-MA` (공식 해결 기준선 > 200)
   2. `EPSILON (100% → 5% DECAY)` (탐색률 감쇠 곡선)
   3. `MSE LOSS PROGRESSION` (신경망 학습 손실 추이)
+- **D3QN ARCHITECTURE SPECS 스펙 카드**: 신경망 레이어 구조, 소프트 타겟 업데이트($\tau=1\text{e-}3$), AdamW 옵티마이저 등 AI 엔진 스펙 명시
 
 ---
 
@@ -224,7 +232,8 @@ python deploy_to_hf.py
 ### 🌐 공식 채널 & 항공우주 강화학습(Aerospace RL) 연구 계보
 - **Research Studio**: [🤗 Hugging Face (@hwihwalab)](https://huggingface.co/hwihwalab) · [🐙 GitHub (@Hwihwa-Lab)](https://github.com/Hwihwa-Lab)
 - **🚀 자율 비행 & 착륙 제어 연구 라인업**:
-  - 🌕 **Phase 1 · 클래식 달 표면 연착륙 (본 모델 / 원천 베이스라인)**: **lunarlander-v3-d3qn** (*수직 중력 낙하 감속 및 자세 제어의 핵심 D3QN 원형*)
+  - 🌕 **Phase 1 · 클래식 달 표면 연착륙 (본 모델 / 원천 베이스라인)**: [lunarlander-v3-d3qn Model Hub](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn)
+  - 🛸 **Phase 1 · 실시간 웹 관제덱**: [lunarlander-v3-d3qn Spaces](https://huggingface.co/spaces/hwihwalab/lunarlander-v3-d3qn) (*Zero-server 60fps 웹 브라우저 비행 덱*)
   - 🏎️ **Phase 2 · 공중 180° 전복 반전 복구 (D3QN)**: [tesla-roadster-flip-landing-d3qn](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn) (*신중한 가치 기반 제어로 100% 무결점 착륙 달성*)
   - 🎯 **Phase 2 · 초고속 탄도 반전 복구 (PPO)**: [tesla-roadster-flip-landing-ppo](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-ppo) (*53% 빠른 애자일 기동으로 98% 연착륙 달성*)
   - 🛸 **듀얼 엔진 실시간 3D 콕핏**: [tesla-roadster-flip-landing](https://huggingface.co/spaces/hwihwalab/tesla-roadster-flip-landing) (*웹 브라우저 60fps 텔레메트리 관제 덱*)
@@ -236,7 +245,4 @@ python deploy_to_hf.py
 
 ---
 
-<p align="center">
-  <em>Crafted with precision and pride by <strong><a href="https://github.com/Hwihwa-Lab">Hwihwa Lab</a></strong></em><br>
-  <strong>AI × Automation × Aesthetics ✨</strong>
-</p>
+*Trained and deployed with [LunarLander Mission Control](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) by **HWIHWALAB**.*

@@ -187,49 +187,102 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================================================
-    // 5. WebSocket Communication
+    // =========================================================================
+    // 5. Dual-Engine Communication (WebSocket Server + Standalone In-Browser Sim)
     // =========================================================================
     let hasEverConnected = false;
+    let localSim = window.LanderSimulator ? new window.LanderSimulator() : null;
+    let isLocalSimActive = false;
+
+    function activateLocalSimulation() {
+        if (isLocalSimActive || !localSim) return;
+        isLocalSimActive = true;
+        isConnected = true;
+        connectionDot.style.background = 'var(--neon-green)';
+        connectionText.textContent = 'STANDALONE FLIGHT SIMULATOR (60FPS)';
+        console.log('[Telemetry] Standalone in-browser simulation activated.');
+
+        localSim.onTelemetry = (msg) => handleTelemetry(msg);
+        localSim.onEpisodeSummary = (msg) => handleEpisodeSummary(msg);
+        localSim.onResetComplete = (msg) => {
+            resetCharts();
+            updateStatsUI(msg.stats);
+        };
+
+        updateStatsUI(localSim.getSummaryStats());
+        localSim.start(); // Auto-start continuous Autopilot demo
+    }
 
     function connectWebSocket() {
-        const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-        const wsUrl = `${protocol}//${window.location.host}/ws`;
-
-        socket = new WebSocket(wsUrl);
-
-        socket.onopen = () => {
-            if (hasEverConnected) {
-                console.log('[WebSocket] Server reconnected. Auto-refreshing deck...');
-                window.location.reload(true);
-                return;
+        // If file:// or static standalone hosting where no ws port exists, activate local simulation after short probe
+        const fallbackTimer = setTimeout(() => {
+            if (!isConnected && !isLocalSimActive && localSim) {
+                activateLocalSimulation();
             }
-            hasEverConnected = true;
-            isConnected = true;
-            connectionDot.style.background = 'var(--neon-green)';
-            connectionText.textContent = 'GYM SIMULATION CONNECTED';
-            console.log('[WebSocket] Connected.');
-        };
+        }, 800);
 
-        socket.onmessage = (event) => {
-            const data = JSON.parse(event.data);
-            handleServerMessage(data);
-        };
+        try {
+            const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsUrl = `${protocol}//${window.location.host}/ws`;
 
-        socket.onclose = () => {
-            isConnected = false;
-            connectionDot.style.background = '#64748b';
-            connectionText.textContent = 'RECONNECTING...';
-            setTimeout(connectWebSocket, 1500);
-        };
+            socket = new WebSocket(wsUrl);
 
-        socket.onerror = (err) => {
-            console.error('[WebSocket] Error:', err);
-        };
+            socket.onopen = () => {
+                clearTimeout(fallbackTimer);
+                if (hasEverConnected) {
+                    console.log('[WebSocket] Server reconnected. Auto-refreshing deck...');
+                    window.location.reload(true);
+                    return;
+                }
+                hasEverConnected = true;
+                isConnected = true;
+                isLocalSimActive = false;
+                connectionDot.style.background = 'var(--neon-green)';
+                connectionText.textContent = 'GYM SIMULATION CONNECTED';
+                console.log('[WebSocket] Connected.');
+            };
+
+            socket.onmessage = (event) => {
+                const data = JSON.parse(event.data);
+                handleServerMessage(data);
+            };
+
+            socket.onclose = () => {
+                isConnected = false;
+                if (!isLocalSimActive && localSim) {
+                    activateLocalSimulation();
+                } else if (!isLocalSimActive) {
+                    connectionDot.style.background = '#64748b';
+                    connectionText.textContent = 'RECONNECTING...';
+                    setTimeout(connectWebSocket, 1500);
+                }
+            };
+
+            socket.onerror = (err) => {
+                console.warn('[WebSocket] Server connection unavailable. Falling back to in-browser engine.');
+                if (!isLocalSimActive && localSim) {
+                    activateLocalSimulation();
+                }
+            };
+        } catch (e) {
+            clearTimeout(fallbackTimer);
+            if (!isLocalSimActive && localSim) {
+                activateLocalSimulation();
+            }
+        }
     }
 
     function sendCommand(cmd, payload = {}) {
         if (socket && socket.readyState === WebSocket.OPEN) {
             socket.send(JSON.stringify({ command: cmd, ...payload }));
+        } else if (isLocalSimActive && localSim) {
+            if (cmd === 'start') localSim.start();
+            else if (cmd === 'pause') localSim.pause();
+            else if (cmd === 'resume') localSim.resume();
+            else if (cmd === 'reset') localSim.reset();
+            else if (cmd === 'set_mode') localSim.setMode(payload.mode);
+            else if (cmd === 'set_speed') localSim.setSpeed(payload.speed);
+            else if (cmd === 'manual_action') localSim.setManualAction(payload.action);
         }
     }
 
@@ -372,22 +425,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         updateStatsUI(msg.stats);
 
-        if (msg.success) {
-            showTouchdownBanner('PERFECT LANDING! 🏆', false);
+        if (msg.banner_class) {
+            showTouchdownBanner(msg.status_text || (msg.success ? 'PERFECT LANDING! 🏆' : 'CRASH DETECTED 💥'), msg.banner_class);
+        } else if (msg.success) {
+            showTouchdownBanner(msg.status_text || 'PERFECT LANDING! 🏆', 'success');
         }
     }
 
     function handleFlightComplete(msg) {
-        if (msg.success) {
-            showTouchdownBanner('TOUCHDOWN SUCCESS! 🎉', false);
+        if (msg.banner_class) {
+            showTouchdownBanner(msg.status_text || (msg.success ? 'TOUCHDOWN SUCCESS! 🎉' : 'MISSION FAILED 💥'), msg.banner_class);
+        } else if (msg.success) {
+            showTouchdownBanner(msg.status_text || 'TOUCHDOWN SUCCESS! 🎉', 'success');
         } else {
-            showTouchdownBanner('MISSION FAILED 💥', true);
+            showTouchdownBanner(msg.status_text || 'MISSION FAILED 💥', 'crash');
         }
     }
 
-    function showTouchdownBanner(text, isCrash) {
+    function showTouchdownBanner(text, bannerClass = 'success') {
         touchdownBanner.textContent = text;
-        touchdownBanner.className = `touchdown-banner ${isCrash ? 'crash' : ''} show`;
+        touchdownBanner.className = `touchdown-banner ${bannerClass} show`;
         setTimeout(() => {
             touchdownBanner.classList.remove('show');
         }, 2200);
@@ -406,6 +463,17 @@ document.addEventListener('DOMContentLoaded', () => {
         statSma.textContent = stats.moving_avg;
         statSuccess.textContent = `${stats.success_rate}%`;
         statLoss.textContent = stats.loss;
+
+        // Mode Buttons Sync
+        if (stats.mode) {
+            modeButtons.forEach(btn => {
+                if (btn.dataset.mode === stats.mode) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
 
         // Button States
         if (stats.is_training && !stats.is_paused) {

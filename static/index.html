@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUNAR LANDER DQN | Gymnasium Mission Control</title>
     <meta name="description" content="Real-time Dueling Double DQN Reinforcement Learning and Flight Simulation Control Deck for Lunar Lander.">
-    <link rel="stylesheet" href="/static/css/style.css?v=20261102_03">
+    <link rel="stylesheet" href="static/css/style.css?v=20261102_05">
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
@@ -205,10 +205,9 @@
                 <div class="ctrl-row">
                     <div class="btn-group">
                         <span style="font-size: 0.8rem; color: var(--text-dim); font-weight: 700;">MODE:</span>
-                        <button class="btn-mode active" data-mode="training" id="modeTrain">⚡ LIVE TRAINING</button>
-                        <button class="btn-mode" data-mode="turbo" id="modeTurbo">⏩ TURBO SPEED</button>
-                        <button class="btn-mode" data-mode="showcase" id="modeShowcase">✨ STYLISH DEMO</button>
+                        <button class="btn-mode active" data-mode="autopilot" id="modeAutopilot">🤖 AUTOPILOT (DEMO)</button>
                         <button class="btn-mode" data-mode="manual" id="modeManual">🎮 MANUAL FLIGHT</button>
+                        <button class="btn-mode" data-mode="training" id="modeTrain">⚡ LIVE TRAINING</button>
                     </div>
 
                     <div class="btn-group">
@@ -315,7 +314,9 @@
     </main>
 
     <!-- Scripts -->
-    <script src="/static/js/render.js?v=20261102_03"></script>
-    <script src="/static/js/app.js?v=20261102_03"></script>
+    <script src="static/js/autopilot_trajectories.js?v=20261102_05"></script>
+    <script src="static/js/lander_sim.js?v=20261102_05"></script>
+    <script src="static/js/render.js?v=20261102_05"></script>
+    <script src="static/js/app.js?v=20261102_05"></script>
 </body>
 </html>

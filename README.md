@@ -78,7 +78,7 @@ model-index:
 
 # 🚀 LunarLander-v3 D3QN // Mission Control Deck
 
-[![Language: English](https://img.shields.io/badge/Language-English-007ACC)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![Language: 한국어](https://img.shields.io/badge/Language-한국어-7cb342)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn/blob/main/README_KR.md) [![Hugging Face Model Hub](https://img.shields.io/badge/🤗%20Model%20Hub-LunarLander--D3QN-orange)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![🏎️ Evolution: Roadster D3QN](https://img.shields.io/badge/Twin%20Evolution-Roadster%20D3QN-purple)](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn) [![🎯 Evolution: Roadster PPO](https://img.shields.io/badge/Twin%20Evolution-Roadster%20PPO-orange)](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-ppo) [![GitHub](https://img.shields.io/badge/GitHub-Hwihwa--Lab-181717?logo=github)](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn/blob/main/LICENSE)
+[![Language: English](https://img.shields.io/badge/Language-English-007ACC)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![Language: 한국어](https://img.shields.io/badge/Language-한국어-7cb342)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn/blob/main/README_KR.md) [![🤗 Live Interactive Space](https://img.shields.io/badge/🤗%20Live%20Space-Mission%20Control-blue)](https://huggingface.co/spaces/hwihwalab/lunarlander-v3-d3qn) [![Hugging Face Model Hub](https://img.shields.io/badge/🤗%20Model%20Hub-LunarLander--D3QN-orange)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![🏎️ Evolution: Roadster D3QN](https://img.shields.io/badge/Twin%20Evolution-Roadster%20D3QN-purple)](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn) [![🎯 Evolution: Roadster PPO](https://img.shields.io/badge/Twin%20Evolution-Roadster%20PPO-orange)](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-ppo) [![GitHub](https://img.shields.io/badge/GitHub-Hwihwa--Lab-181717?logo=github)](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn/blob/main/LICENSE)
 
 [![PyTorch](https://img.shields.io/badge/PyTorch-D3QN-red)](https://pytorch.org) [![Gymnasium](https://img.shields.io/badge/Gymnasium-v1.0-darkgreen)](https://gymnasium.farama.org/environments/box2d/lunar_lander/) [![Benchmark](https://img.shields.io/badge/Benchmark-Score%20%2B311.16%20(Solved%20%3E200)-10B981)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![Aerodynamics](https://img.shields.io/badge/Dynamics-6--DoF%20Lunar%20Gravity%20%26%20RCS-E11D48)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![Telemetry](https://img.shields.io/badge/Telemetry-Real--Time%20WebSocket%2050Hz-06B6D4)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![Research Lab](https://img.shields.io/badge/Research%20Lab-Hwihwa%20Lab-d0f991?labelColor=050807)](https://github.com/Hwihwa-Lab)
 
@@ -87,7 +87,7 @@ model-index:
 >  
 > 🏛️ **Foundational Research Baseline**: This project establishes the core algorithmic and mathematical foundation for Hwihwa Lab's advanced [Tesla Roadster 180° Inversion Flip-Landing Study (D3QN & PPO)](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn).  
 >  
-> 🌐 [English Documentation](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) | 🇰🇷 [한국어 매뉴얼](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn/blob/main/README_KR.md) | 🏎️ [Roadster D3QN](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn) | 🎯 [Roadster PPO](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-ppo)”  
+> 🌐 [Live Interactive Space](https://huggingface.co/spaces/hwihwalab/lunarlander-v3-d3qn) | 📦 [English Model Card](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) | 🇰🇷 [한국어 매뉴얼](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn/blob/main/README_KR.md) | 🏎️ [Roadster D3QN](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn) | 🎯 [Roadster PPO](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-ppo)”  
 > *Developed by [Hwihwa Lab](https://github.com/Hwihwa-Lab) · AI × Automation × Aesthetics ✨*
 
 **LunarLander D3QN Mission Control Deck** is an advanced Dueling Double Deep Q-Network (D3QN) reinforcement learning system paired with a zero-scroll, real-time 3-column aerospace telemetry dashboard engineered for high-precision, stylish lunar touchdowns.
@@ -134,8 +134,9 @@ Engineered as a **1536x762 zero-scroll, high-density aerospace flight telemetry 
 | 👈 LEFT: FLIGHT HUD          | 🛸 CENTER: SIMULATION STREAM  | 👉 RIGHT: TRAINING ANALYTICS |
 | - Attitude & Pitch Gyro      | - High-FPS Apollo 2D Canvas   | - 4 Stats (Score, SMA, etc.) |
 | - Velocity Gauges (Vy, Vx)   | - Mission Control Action Deck | - Chart 1: Reward & 100-MA   |
-| - Coordinates & Leg Sensors  | - 4 Mode Tabs & Speed Control | - Chart 2: Epsilon Decay     |
-| - 4-Action DQN Q-Values      | - Touchdown / Crash Banner    | - Chart 3: MSE Loss Progress |
+| - Coordinates & Leg Sensors  | - Autopilot / Manual / Train  | - Chart 2: Epsilon Decay     |
+| - 4-Action DQN Q-Values      | - Time Warp Speed Multipliers | - Chart 3: MSE Loss Progress |
+| - Mission Avionics Specs     | - Strict Quality Tiers Banner | - D3QN Architecture Specs    |
 +------------------------------+-------------------------------+------------------------------+
 ```
 
@@ -144,17 +145,23 @@ Engineered as a **1536x762 zero-scroll, high-density aerospace flight telemetry 
 - **Velocity Vector Bars**: Real-time vertical ($V_y$) and horizontal ($V_x$) velocity progress meters with caution/danger color thresholds.
 - **Coordinates & Contact Sensors**: Real-time altitude ($Y$), pad offset ($X$), and left/right landing gear contact indicators.
 - **4-Action DQN Q-Values**: Live Q-value bars for `0: IDLE (COAST)`, `1: LEFT THRUSTER`, `2: MAIN THRUSTER`, `3: RIGHT THRUSTER`.
+- **Mission Avionics & Sensors**: Real-time hardware telemetry specs card (Inertial Measurement Unit, LIDAR altimeter, RCS solenoid valves).
 
 ### 2) 🛸 Center Column: SIMULATION STREAM & FLIGHT CONTROLS
-- **Hardware-Accelerated 2D Canvas**: Apollo/SpaceX lander sprite, plasma exhaust particle engines, neon trajectory motion trails, lunar terrain with craters, landing flags, and golden touchdown fireworks.
+- **Hardware-Accelerated 2D Canvas**: Apollo/SpaceX lander sprite, plasma exhaust particle engines, neon trajectory motion trails, Box2D terrain with landing flags ($|X| \le 0.20$), and golden touchdown fireworks.
 - **Integrated Mission Controls**:
-  - `[▶ START MISSION]`, `[⏸ PAUSE]`, `[🔄 RESET]`, `[📥 LOAD BEST MODEL]`
-- **4 Flight Operating Modes**:
-  - `⚡ LIVE TRAINING`: Real-time active RL training and exploration flight.
-  - `⏩ TURBO SPEED`: High-speed training with minimal rendering latency.
-  - `✨ STYLISH DEMO`: Zero-exploration ($\epsilon=0.0$) showcase of trained best model.
-  - `🎮 MANUAL FLIGHT`: Human keyboard manual flight simulator.
+  - `[▶ START MISSION]`: Immediately initiates continuous autonomous flights (in Autopilot mode) or active flight control.
+  - `[⏸ PAUSE]`, `[🔄 RESET]`, `[📥 LOAD BEST MODEL]`.
+- **3 Unified Operating Modes**:
+  - `🤖 AUTOPILOT (DEMO)` *(Default)*: Continuous autonomous landing showcase using the pre-trained D3QN checkpoint ($\epsilon=0.0$) across curated mission seeds with 100% touchdown success and a 1.2s celebration pause between flights.
+  - `🎮 MANUAL FLIGHT`: Interactive human keyboard flight simulator (`W`/`A`/`D`, Arrow keys, or Spacebar).
+  - `⚡ LIVE TRAINING`: Live reinforcement learning with dynamic epsilon decay ($1.0 \to 0.05$) and experience replay updates.
 - **Speed Multipliers**: `1x`, `2x`, `5x`, `⚡ MAX`.
+- **Strict Touchdown Quality Validation (No False Positives)**:
+  - `PERFECT SOFT TOUCHDOWN! 🏆`: Dead-center ($|X| \le 0.08$), ultra-soft descent ($|V_y| \le 0.35$), dual-leg contact.
+  - `TOUCHDOWN SUCCESS! 🎉`: Strictly on-pad between flags ($|X| \le 0.20$), safe descent ($|V_y| \le 0.55$), leg contact.
+  - `OFF-PAD LANDING (OUT OF BOUNDS) ⚠️`: Safe upright resting, but outside the designated landing pad flags.
+  - `CRASH DETECTED 💥`: Excessive touchdown impact, capsized orientation, or hull collision.
 
 ### 3) 👉 Right Column: DQN TRAINING ANALYTICS
 - **4 Real-time Metrics**: `CURRENT SCORE`, `SMA 100 AVG`, `SUCCESS RATE (%)`, `TRAINING LOSS`.
@@ -162,6 +169,7 @@ Engineered as a **1536x762 zero-scroll, high-density aerospace flight telemetry 
   1. `EPISODE REWARD & 100-MA` (Solved Threshold: > 200.0)
   2. `EPSILON (100% → 5% DECAY)` (Exploration decay curve)
   3. `MSE LOSS PROGRESSION` (Neural network loss trajectory)
+- **D3QN Architecture Specs**: Detailed neural network topology, Soft Polyak update, and AdamW hyperparameter specs.
 
 ---
 
@@ -247,7 +255,8 @@ env.close()
 ### 🌐 Connect & Aerospace RL Ecosystem
 - **Research Studio**: [🤗 Hugging Face (@hwihwalab)](https://huggingface.co/hwihwalab) · [🐙 GitHub (@Hwihwa-Lab)](https://github.com/Hwihwa-Lab)
 - **🚀 Autonomous Flight & Landing Control Lineup**:
-  - 🌕 **Phase 1 · Classical Soft Landing (Current Model / Foundational Baseline)**: **lunarlander-v3-d3qn** (*D3QN baseline for vertical gravitational descent & attitude damping*)
+  - 🌕 **Phase 1 · Classical Soft Landing (Current Model / Foundational Baseline)**: [lunarlander-v3-d3qn Model Hub](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn)
+  - 🛸 **Phase 1 · Live Interactive Mission Control Deck**: [lunarlander-v3-d3qn Spaces](https://huggingface.co/spaces/hwihwalab/lunarlander-v3-d3qn) (*Zero-server 60fps in-browser flight deck*)
   - 🏎️ **Phase 2 · Acrobatic Inversion Recovery (D3QN)**: [tesla-roadster-flip-landing-d3qn](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn) (*100% touchdown rate with cautious attitude control*)
   - 🎯 **Phase 2 · Acrobatic Inversion Recovery (PPO)**: [tesla-roadster-flip-landing-ppo](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-ppo) (*98% touchdown rate with ultra-fast agile ballistic descent*)
   - 🛸 **Dual-Engine Interactive Cockpit**: [tesla-roadster-flip-landing](https://huggingface.co/spaces/hwihwalab/tesla-roadster-flip-landing) (*Real-time in-browser 60fps comparison deck*)
@@ -259,7 +268,4 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 
 ---
 
-<p align="center">
-  <em>Crafted with precision and pride by <strong><a href="https://github.com/Hwihwa-Lab">Hwihwa Lab</a></strong></em><br>
-  <strong>AI × Automation × Aesthetics ✨</strong>
-</p>
+*Trained and deployed with [LunarLander Mission Control](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) by **HWIHWALAB**.*

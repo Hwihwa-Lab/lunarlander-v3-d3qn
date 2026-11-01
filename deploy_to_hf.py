@@ -1,6 +1,17 @@
 """
 One-Click Hugging Face Deployment Pipeline for Lunar Lander D3QN.
-Uploads model weights, config, and auto-generated Model Card (README.md) to Hugging Face Hub.
+Deploys Model Hub (Weights, Config, Docs) and Interactive Static Space (60FPS Web Deck).
+100% Free Forever, Zero-Server Cost, Zero Subscription Required.
+
+Usage:
+    # 1. Deploy Live Interactive Space (Public Default)
+    python deploy_to_hf.py --target space
+
+    # 2. Deploy Model Hub (Weights & Config)
+    python deploy_to_hf.py --target model
+
+    # 3. Deploy All (Both Model Hub and Spaces)
+    python deploy_to_hf.py --target all
 """
 
 import os
@@ -8,202 +19,17 @@ import sys
 import json
 import argparse
 from pathlib import Path
-import torch
 from huggingface_hub import HfApi, create_repo
 
-def generate_model_card(repo_id: str, best_score: float = None) -> str:
-    """Generate Hugging Face Model Card with metadata and evaluation docs."""
-    score_display = f"{best_score:.1f}" if best_score is not None else "200.0+ (Solved)"
-    
-    card_content = f"""---
-library_name: gymnasium
-tags:
-- reinforcement-learning
-- dqn
-- d3qn
-- dueling-dqn
-- double-dqn
-- deep-q-network
-- lunarlander-v3
-- pytorch
-- aerospace
-pipeline_tag: reinforcement-learning
-license: mit
-model-index:
-- name: {repo_id.split('/')[-1]}
-  results:
-  - task:
-      type: reinforcement-learning
-      name: Reinforcement Learning
-    dataset:
-      name: Gymnasium LunarLander-v3
-      type: gymnasium/lunar-lander-v3
-    metrics:
-    - type: mean_reward
-      value: {score_display}
-      name: Mean Evaluation Reward
----
 
-# 🚀 LunarLander-v3 D3QN // Mission Control Deck
-
-[![Language: English](https://img.shields.io/badge/Language-English-blue)](README.md)
-[![Language: 한국어](https://img.shields.io/badge/Language-한국어-green)](README_KR.md)
-[![Hugging Face Model Hub](https://img.shields.io/badge/🤗%20Hugging%20Face-Model%20Hub-orange)](https://huggingface.co/{repo_id})
-[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=flat&logo=github)](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn/blob/main/LICENSE)
-[![Gymnasium](https://img.shields.io/badge/Gymnasium-LunarLander--v3-darkgreen)](https://gymnasium.farama.org/environments/box2d/lunar_lander/)
-[![Algorithm](https://img.shields.io/badge/Algorithm-DQN-blue)](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
-[![PyTorch](https://img.shields.io/badge/PyTorch-D3QN-red)](https://pytorch.org)
-
-> **Gymnasium Box2D `LunarLander-v3` Reinforcement Learning Agent & Real-time Aerospace Telemetry System**  
-> *[ 🌐 English Documentation ](README.md) | [ 🇰🇷 한국어 매뉴얼 ](README_KR.md)*
-
-This repository contains a pre-trained **Dueling Double Deep Q-Network (D3QN)** agent trained on the [Gymnasium](https://gymnasium.farama.org/environments/box2d/lunar_lander/) `LunarLander-v3` environment.
-
----
-
-## 🌟 Model Highlights
-- **Algorithm**: Dueling Double DQN (D3QN) with Soft Target Updates ($\\tau = 0.001$)
-- **Architecture**: Separated Value ($V(s)$) and Advantage ($A(s, a)$) streams ($8 \\to 128 \\to 128 \\to 64 \\to 4$)
-- **Optimization**: Smooth L1 (Huber) Loss, AdamW, Gradient Clipping
-- **Custom Reward Shaping**: Stabilized pitch angle, soft touchdown velocity damping, and center-pad landing rewards.
-
----
-
-## 📂 Repository Contents
-- `best_model.pth`: Pre-trained PyTorch Dueling Double DQN neural network weights (+311.16 score).
-- `config.json`: Model architecture, hyperparameters, and environment specifications.
-- `dqn_agent.py`: Complete PyTorch source code for `DQNAgent` and `DuelingQNetwork`.
-- `README.md`: Global English Model Card and evaluation guide.
-- `README_KR.md`: Full Korean comprehensive manual and telemetry specifications.
-
----
-
-## 📊 Environment & Action Space
-
-- **Observation Space (8 Dimensions)**:
-  1. Coordinate $X$
-  2. Coordinate $Y$
-  3. Linear Velocity $V_x$
-  4. Linear Velocity $V_y$
-  5. Pitch Angle $\\theta$
-  6. Angular Velocity $\\omega$
-  7. Left Leg Ground Contact (0 or 1)
-  8. Right Leg Ground Contact (0 or 1)
-
-- **Action Space (4 Discrete Actions)**:
-  - `0`: IDLE (Coast)
-  - `1`: Fire Left Thruster
-  - `2`: Fire Main Engine Thruster
-  - `3`: Fire Right Thruster
-
----
-
-## ⚙️ Hyperparameters
-
-| Hyperparameter | Value | Description |
-| :--- | :--- | :--- |
-| **Learning Rate** | `5e-4` | AdamW optimizer learning rate |
-| **Discount Factor ($\\gamma$)** | `0.99` | Future reward discount factor |
-| **Replay Buffer Size** | `100,000` | Experience replay memory capacity |
-| **Batch Size** | `64` | Mini-batch sample size for training |
-| **Target Network Update ($\\tau$)** | `0.001` | Polyak soft update rate |
-| **Exploration ($\\epsilon$)** | `1.0 \\to 0.05` | 100% exploration decaying to 5% |
-
----
-
-## 💻 How to Load & Evaluate
-
-You can easily load and run this trained model in Python using PyTorch and Gymnasium:
-
-```python
-import torch
-import torch.nn as nn
-import gymnasium as gym
-
-# 1. Define Dueling DQN Architecture
-class DuelingDQN(nn.Module):
-    def __init__(self, state_dim=8, action_dim=4):
-        super().__init__()
-        self.feature_network = nn.Sequential(
-            nn.Linear(state_dim, 128),
-            nn.LayerNorm(128),
-            nn.ReLU(),
-            nn.Linear(128, 128),
-            nn.LayerNorm(128),
-            nn.ReLU(),
-        )
-        self.value_stream = nn.Sequential(
-            nn.Linear(128, 64),
-            nn.ReLU(),
-            nn.Linear(64, 1)
-        )
-        self.advantage_stream = nn.Sequential(
-            nn.Linear(128, 64),
-            nn.ReLU(),
-            nn.Linear(64, action_dim)
-        )
-
-    def forward(self, state):
-        features = self.feature_network(state)
-        values = self.value_stream(features)
-        advantages = self.advantage_stream(features)
-        return values + (advantages - advantages.mean(dim=-1, keepdim=True))
-
-# 2. Download weights from Hugging Face Hub
-from huggingface_hub import hf_hub_download
-
-weights_path = hf_hub_download(repo_id="{repo_id}", filename="best_model.pth")
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
-model = DuelingDQN().to(device)
-model.load_state_dict(torch.load(weights_path, map_location=device))
-model.eval()
-
-# 3. Test Agent Flight
-env = gym.make("LunarLander-v3", render_mode="human")
-state, _ = env.reset()
-total_reward = 0
-
-for _ in range(1000):
-    state_t = torch.FloatTensor(state).unsqueeze(0).to(device)
-    with torch.no_grad():
-        action = model(state_t).argmax(dim=-1).item()
-    
-    state, reward, terminated, truncated, _ = env.step(action)
-    total_reward += reward
-    if terminated or truncated:
-        break
-
-print(f"Final Flight Reward: {{total_reward:.2f}}")
-env.close()
-```
-
----
-
-## 🛠️ Training & Telemetry
-Developed and trained with the [**Lunar Lander Mission Control Deck**](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn) real-time telemetry system.
-- Full Dashboard UI & Source Code: [https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
-
----
-
-## 📄 License
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn/blob/main/LICENSE) file for details.
-
----
-
-*Trained and deployed with [LunarLander Mission Control](https://huggingface.co/{repo_id}) by **hwihwalab**.*
-"""
-    return card_content.strip()
-
-def deploy(repo_name: str = "lunarlander-v3-d3qn", private: bool = False, model_path: str = "models/best_model.pth"):
+def deploy_model(repo_name: str = "lunarlander-v3-d3qn", private: bool = False, model_path: str = "models/best_model.pth") -> bool:
     api = HfApi()
     
     # 1. Verify authentication
     try:
         user_info = api.whoami()
         username = user_info["name"]
-        print(f"🔑 Authenticated as: [bold cyan]{username}[/bold cyan]" if "rich" in sys.modules else f"🔑 Authenticated as: {username}")
+        print(f"🔑 Authenticated as: {username}")
     except Exception as e:
         print(f"❌ Authentication failed. Please run 'hf auth login' first. Error: {e}")
         return False
@@ -219,10 +45,10 @@ def deploy(repo_name: str = "lunarlander-v3-d3qn", private: bool = False, model_
     print(f"📦 Model weight found: {model_path} ({os.path.getsize(model_path) / 1024:.1f} KB)")
 
     # 3. Create or verify repository on Hugging Face
-    print(f"🌐 Creating / checking repository: {repo_id} (Private={private})...")
+    print(f"\n🌐 Creating / checking Model Hub repository: {repo_id} (Private={private})...")
     try:
         create_repo(repo_id=repo_id, repo_type="model", private=private, exist_ok=True)
-        print(f"✅ Repository ready: https://huggingface.co/{repo_id}")
+        print(f"✅ Model Hub ready: https://huggingface.co/{repo_id}")
     except Exception as e:
         print(f"❌ Failed to create repo {repo_id}: {e}")
         return False
@@ -249,8 +75,8 @@ def deploy(repo_name: str = "lunarlander-v3-d3qn", private: bool = False, model_
     with open(config_file, "w", encoding="utf-8") as f:
         json.dump(config_data, f, indent=2)
 
-    # 5. Upload files to Hugging Face Hub
-    print("📤 Uploading files to Hugging Face Hub...")
+    # 5. Upload files to Hugging Face Model Hub
+    print("📤 Uploading files to Hugging Face Model Hub...")
     try:
         # Upload model weight
         api.upload_file(
@@ -272,7 +98,7 @@ def deploy(repo_name: str = "lunarlander-v3-d3qn", private: bool = False, model_
         )
         print("  - [2/5] Uploaded config.json ✅")
         
-        # Upload dqn_agent.py (PyTorch architecture source)
+        # Upload dqn_agent.py
         if os.path.exists("dqn_agent.py"):
             api.upload_file(
                 path_or_fileobj="dqn_agent.py",
@@ -283,7 +109,7 @@ def deploy(repo_name: str = "lunarlander-v3-d3qn", private: bool = False, model_
             )
             print("  - [3/5] Uploaded dqn_agent.py (Architecture Source) ✅")
         
-        # Upload README.md (Global English Model Card directly from root)
+        # Upload README.md
         if os.path.exists("README.md"):
             api.upload_file(
                 path_or_fileobj="README.md",
@@ -294,7 +120,7 @@ def deploy(repo_name: str = "lunarlander-v3-d3qn", private: bool = False, model_
             )
             print("  - [4/5] Uploaded README.md (Global English Model Card) ✅")
 
-        # Upload README_KR.md (Korean Manual)
+        # Upload README_KR.md
         if os.path.exists("README_KR.md"):
             api.upload_file(
                 path_or_fileobj="README_KR.md",
@@ -320,17 +146,148 @@ def deploy(repo_name: str = "lunarlander-v3-d3qn", private: bool = False, model_
         print(f"❌ Upload failed: {e}")
         return False
 
-    print("\n" + "="*60)
-    print("🎉 DEPLOYMENT COMPLETE! YOUR MODEL IS LIVE ON HUGGING FACE! 🚀")
-    print(f"👉 Model URL: https://huggingface.co/{repo_id}")
-    print("="*60 + "\n")
+    print("\n" + "=" * 60)
+    print("🎉 MODEL HUB DEPLOYMENT COMPLETE!")
+    print(f"👉 Model Hub URL: https://huggingface.co/{repo_id}")
+    print("=" * 60 + "\n")
     return True
+
+
+def deploy_space(space_name: str = "lunarlander-v3-d3qn", private: bool = False) -> bool:
+    api = HfApi()
+    
+    # 1. Verify authentication
+    try:
+        user_info = api.whoami()
+        username = user_info["name"]
+        print(f"🔑 Authenticated as: {username}")
+    except Exception as e:
+        print(f"❌ Authentication failed: {e}")
+        return False
+
+    space_id = f"{username}/{space_name}"
+    print("\n" + "=" * 60)
+    print(f"🛸 Deploying to Hugging Face Static Spaces: {space_id} (Public={not private})")
+    print("=" * 60)
+
+    try:
+        create_repo(
+            repo_id=space_id,
+            repo_type="space",
+            space_sdk="static",
+            private=private,
+            exist_ok=True
+        )
+        print(f"✅ Space repository ready: https://huggingface.co/spaces/{space_id}")
+    except Exception as e:
+        print(f"❌ Failed to create Space repo {space_id}: {e}")
+        return False
+
+    # 2. Upload Space README.md with Static frontmatter
+    space_readme = f"""---
+title: LunarLander-v3 D3QN Mission Control
+emoji: 🚀
+colorFrom: blue
+colorTo: indigo
+sdk: static
+pinned: false
+license: mit
+tags:
+- reinforcement-learning
+- gymnasium
+- d3qn
+- pytorch
+- aerospace
+- box2d
+---
+
+# 🚀 LunarLander-v3 D3QN // Mission Control Deck
+
+High-precision Dueling Double Deep Q-Network (D3QN) Reinforcement Learning Flight Simulator & Aerospace Telemetry Control Deck.
+
+Developed by **[Hwihwa Lab](https://github.com/Hwihwa-Lab)** · *AI × Automation × Aesthetics ✨*
+
+- **Model Hub**: [https://huggingface.co/{username}/lunarlander-v3-d3qn](https://huggingface.co/{username}/lunarlander-v3-d3qn)
+- **GitHub Repository**: [https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
+- **Twin Evolution (Phase 2)**: [Tesla Roadster 180° Inversion Landing](https://huggingface.co/spaces/{username}/tesla-roadster-flip-landing)
+
+---
+
+*Trained and deployed with [LunarLander Mission Control](https://huggingface.co/spaces/{space_id}) by **HWIHWALAB**.*
+"""
+
+    print("📤 Uploading static application assets to Hugging Face Spaces...")
+    try:
+        # 1. README.md
+        api.upload_file(
+            path_or_fileobj=space_readme.encode("utf-8"),
+            path_in_repo="README.md",
+            repo_id=space_id,
+            repo_type="space",
+            commit_message="Update Space README with Static SDK metadata"
+        )
+        print("  - [1/4] Uploaded README.md (Space Metadata) ✅")
+
+        # 2. index.html at root of Space
+        if os.path.exists("static/index.html"):
+            api.upload_file(
+                path_or_fileobj="static/index.html",
+                path_in_repo="index.html",
+                repo_id=space_id,
+                repo_type="space",
+                commit_message="Upload index.html to Space root"
+            )
+            print("  - [2/4] Uploaded index.html (Cockpit UI) ✅")
+
+        # 3. static/ folder (css, js)
+        if os.path.exists("static"):
+            api.upload_folder(
+                folder_path="static",
+                path_in_repo="static",
+                repo_id=space_id,
+                repo_type="space",
+                commit_message="Upload static CSS and JS telemetry assets"
+            )
+            print("  - [3/4] Uploaded static/ assets folder ✅")
+
+        # 4. LICENSE
+        if os.path.exists("LICENSE"):
+            api.upload_file(
+                path_or_fileobj="LICENSE",
+                path_in_repo="LICENSE",
+                repo_id=space_id,
+                repo_type="space",
+                commit_message="Add MIT License"
+            )
+            print("  - [4/4] Uploaded LICENSE ✅")
+
+    except Exception as e:
+        print(f"❌ Space upload failed: {e}")
+        return False
+
+    print("\n" + "=" * 60)
+    print("🎉 SPACE DEPLOYMENT COMPLETE! YOUR APP IS 100% LIVE ON HUGGING FACE! 🚀")
+    print(f"👉 Live Space URL: https://huggingface.co/spaces/{space_id}")
+    print("=" * 60 + "\n")
+    return True
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Deploy LunarLander DQN to Hugging Face")
-    parser.add_argument("--repo-name", type=str, default="lunarlander-v3-d3qn", help="Name of the Hugging Face repository")
-    parser.add_argument("--private", action="store_true", help="Set repository to private")
+    parser.add_argument(
+        "--target",
+        type=str,
+        default="space",
+        choices=["all", "model", "space"],
+        help="Deployment target: 'space' (interactive web deck), 'model' (weights), or 'all'"
+    )
+    parser.add_argument("--repo-name", type=str, default="lunarlander-v3-d3qn", help="Name of the repository")
+    parser.add_argument("--private", action="store_true", help="Set repository to private (default: public)")
     parser.add_argument("--model-path", type=str, default="models/best_model.pth", help="Path to model weights")
     args = parser.parse_args()
 
-    deploy(repo_name=args.repo_name, private=args.private, model_path=args.model_path)
+    if args.target in ["all", "model"]:
+        deploy_model(repo_name=args.repo_name, private=args.private, model_path=args.model_path)
+
+    if args.target in ["all", "space"]:
+        deploy_space(space_name=args.repo_name, private=args.private)

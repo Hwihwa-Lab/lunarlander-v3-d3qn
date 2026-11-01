@@ -199,16 +199,14 @@ env.close()
 
 ---
 
-## 🛡️ AI Vibe-Coding Governance & Documentation Architecture
+## 📂 Repository Contents
 
-This repository is strictly protected by automated anti-vibe-coding governance to preserve architecture integrity and prevent regression:
-
-- **[`.cursorrules`](file:///c:/Users/crack/Lunalander/.cursorrules)**: AI Vibe-Coding Defense Master Constitution
-- **[`DOCS_AI_CODING_PROTOCOL.md`](file:///c:/Users/crack/Lunalander/DOCS_AI_CODING_PROTOCOL.md)**: Master Coding Protocol & Document Map
-- **[`DOCS_UI_DESIGN_SPEC.md`](file:///c:/Users/crack/Lunalander/DOCS_UI_DESIGN_SPEC.md)**: UI/UX Invariance Specification (1536x762 One-Screen 3-Column Deck)
-- **[`DOCS_SYSTEM_ARCHITECTURE.md`](file:///c:/Users/crack/Lunalander/DOCS_SYSTEM_ARCHITECTURE.md)**: Full-Stack System Architecture Spec
-- **[`DOCS_DATA_SCHEMA.md`](file:///c:/Users/crack/Lunalander/DOCS_DATA_SCHEMA.md)**: WebSocket Telemetry Protocol & Data Schema
-- **[`DOCS_MODEL_EVALUATION_AND_HF_DEPLOY.md`](file:///c:/Users/crack/Lunalander/DOCS_MODEL_EVALUATION_AND_HF_DEPLOY.md)**: Evaluation Standards & Hugging Face Hub Pipeline
+- `best_model.pth`: Pretrained PyTorch Dueling Double DQN neural network weights (+311.16 score).
+- `config.json`: Model architecture, state/action specifications, and hyperparameter configuration.
+- `dqn_agent.py`: Standalone PyTorch implementation of `DQNAgent` and `DuelingQNetwork`.
+- `README.md`: Official global English model card and benchmark documentation.
+- `README_KR.md`: Comprehensive Korean technical manual and aerospace telemetry specifications.
+- `LICENSE`: MIT License.
 
 ---
 

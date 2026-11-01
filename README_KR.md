@@ -156,16 +156,14 @@ model-index:
 
 ---
 
-## 🛡️ AI 바이브 코딩 방어 및 문서화 시스템
+## 📂 저장소 파일 구성 (Repository Contents)
 
-본 프로젝트는 무단 디자인 변경 및 데이터 스키마 왜곡을 방지하기 위한 체계적인 문서 규칙을 갖추고 있습니다.
-
-- **[`.cursorrules`](file:///c:/Users/crack/Lunalander/.cursorrules)**: AI Vibe-Coding 방어 규칙 (디자인 보존 및 문서 자동 동기화 의무)
-- **[`DOCS_AI_CODING_PROTOCOL.md`](file:///c:/Users/crack/Lunalander/DOCS_AI_CODING_PROTOCOL.md)**: 마스터 코딩 프로토콜 및 문서 맵핑
-- **[`DOCS_UI_DESIGN_SPEC.md`](file:///c:/Users/crack/Lunalander/DOCS_UI_DESIGN_SPEC.md)**: UI/디자인 불변 규격서 (원스크린 3단 덱)
-- **[`DOCS_SYSTEM_ARCHITECTURE.md`](file:///c:/Users/crack/Lunalander/DOCS_SYSTEM_ARCHITECTURE.md)**: 시스템 아키텍처 명세서
-- **[`DOCS_DATA_SCHEMA.md`](file:///c:/Users/crack/Lunalander/DOCS_DATA_SCHEMA.md)**: WebSocket 텔레메트리 및 데이터 스키마
-- **[`DOCS_MODEL_EVALUATION_AND_HF_DEPLOY.md`](file:///c:/Users/crack/Lunalander/DOCS_MODEL_EVALUATION_AND_HF_DEPLOY.md)**: 모델 평가 기준 및 허깅페이스 배포 가이드
+- `best_model.pth`: 공식 해결 기준(+200.0)을 압도적으로 초과 달성한 D3QN 최적 모델 가중치 (+311.16점)
+- `config.json`: 모델 신경망 구조, 하이퍼파라미터 및 Box2D 환경 설정 파일
+- `dqn_agent.py`: 독립 실행 가능한 PyTorch 기반 `DQNAgent` 및 `DuelingQNetwork` 신경망 아키텍처 원본 소스코드
+- `README.md`: 글로벌 배포용 공식 영문 모델 카드 및 벤치마크 가이드
+- `README_KR.md`: 한국어 종합 미션 컨트롤 기술 매뉴얼 및 텔레메트리 관제 명세서
+- `LICENSE`: MIT 오픈소스 라이선스 전문
 
 ---
 

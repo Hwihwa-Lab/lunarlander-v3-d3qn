@@ -569,6 +569,30 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Chart Oscilloscope Tab Switcher
+    const chartTabs = document.querySelectorAll('.chart-tab');
+    const chartPanes = document.querySelectorAll('.chart-tab-pane');
+    chartTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            const target = tab.dataset.chart;
+            chartTabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            chartPanes.forEach(pane => {
+                if (pane.id === `pane${target.charAt(0).toUpperCase() + target.slice(1)}`) {
+                    pane.style.display = 'block';
+                } else {
+                    pane.style.display = 'none';
+                }
+            });
+
+            // Trigger Chart resize/update on tab show
+            if (target === 'reward') rewardChart.resize();
+            else if (target === 'loss') lossChart.resize();
+            else if (target === 'epsilon') epsilonChart.resize();
+        });
+    });
+
     // =========================================================================
     // 8. Keyboard Controls for Manual Mode
     // =========================================================================

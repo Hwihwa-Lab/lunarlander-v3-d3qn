@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUNAR LANDER DQN | Gymnasium Mission Control</title>
     <meta name="description" content="Real-time Dueling Double DQN Reinforcement Learning and Flight Simulation Control Deck for Lunar Lander.">
-    <link rel="stylesheet" href="static/css/style.css?v=20261102_06">
+    <link rel="stylesheet" href="static/css/style.css?v=20261102_08">
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
@@ -145,28 +145,24 @@
                 </div>
             </div>
 
-            <!-- MISSION AVIONICS & HARDWARE SPECS -->
+            <!-- MISSION AVIONICS & SENSORS -->
             <div class="section-subhdr" style="margin-top: 0.15rem;">MISSION AVIONICS & SENSORS</div>
-            <div class="kernel-spec-box">
-                <div class="spec-row">
-                    <span class="spec-k">MAIN PROPULSION</span>
-                    <span class="spec-v highlight-green">Main Engine (Throttle 100%)</span>
-                </div>
-                <div class="spec-row">
-                    <span class="spec-k">RCS ATTITUDE</span>
-                    <span class="spec-v">Dual Lateral Thrusters</span>
-                </div>
-                <div class="spec-row">
+            <div class="kernel-spec-grid">
+                <div class="spec-cell">
                     <span class="spec-k">TARGET PAD</span>
-                    <span class="spec-v highlight-cyan">HWIHWA Base (X: 0.0, Y: 0.0)</span>
+                    <span class="spec-v highlight-cyan">HWIHWA Base (X:0, Y:0)</span>
                 </div>
-                <div class="spec-row">
-                    <span class="spec-k">SAFE TOUCHDOWN</span>
-                    <span class="spec-v">|Vy| &lt; 0.4 m/s, |Vx| &lt; 0.2 m/s</span>
+                <div class="spec-cell">
+                    <span class="spec-k">SAFE VEL</span>
+                    <span class="spec-v">|Vy| &lt; 0.4, |Vx| &lt; 0.2</span>
                 </div>
-                <div class="spec-row">
-                    <span class="spec-k">AUTONOMOUS NAV</span>
-                    <span class="spec-v highlight-green">CLOSED-LOOP D3QN ACTIVE</span>
+                <div class="spec-cell" style="grid-column: span 2;">
+                    <div class="manual-keys-row">
+                        <span class="key-tag">🎮 MANUAL</span>
+                        <kbd class="key-badge">W</kbd> <span>MAIN</span>
+                        <kbd class="key-badge">A</kbd> <span>LEFT</span>
+                        <kbd class="key-badge">D</kbd> <span>RIGHT</span>
+                    </div>
                 </div>
             </div>
         </aside>
@@ -249,11 +245,18 @@
                 </div>
             </div>
 
-            <!-- 3-Tier Multi Charts -->
-            <div class="section-subhdr" style="margin-top: 0.15rem;">CONVERGENCE CURVES (3-TIER)</div>
+            <!-- Interactive Convergence Oscilloscope (Tabbed) -->
+            <div class="chart-header-row">
+                <div class="section-subhdr" style="margin-bottom: 0;">CONVERGENCE CURVES</div>
+                <div class="chart-tab-group">
+                    <button class="chart-tab active" data-chart="reward">REWARD</button>
+                    <button class="chart-tab" data-chart="loss">LOSS</button>
+                    <button class="chart-tab" data-chart="epsilon">EPSILON (ε)</button>
+                </div>
+            </div>
             <div class="multi-charts-wrapper">
                 <!-- Chart 1: Reward & 100-MA -->
-                <div class="chart-box">
+                <div class="chart-box chart-tab-pane active" id="paneReward">
                     <div class="chart-title-row">
                         <strong>EPISODE REWARD & 100-MA (Goal: > 200)</strong>
                         <span>• Score • SMA 100</span>
@@ -263,51 +266,53 @@
                     </div>
                 </div>
 
-                <!-- Chart 2: Epsilon Decay -->
-                <div class="chart-box">
-                    <div class="chart-title-row">
-                        <strong>EPSILON (100% → 5% DECAY)</strong>
-                        <span>• Epsilon ε</span>
-                    </div>
-                    <div class="chart-canvas-box">
-                        <canvas id="epsilonChart"></canvas>
-                    </div>
-                </div>
-
-                <!-- Chart 3: MSE Loss Progression -->
-                <div class="chart-box">
+                <!-- Chart 2: MSE Loss Progression -->
+                <div class="chart-box chart-tab-pane" id="paneLoss" style="display: none;">
                     <div class="chart-title-row">
                         <strong>MSE LOSS PROGRESSION</strong>
-                        <span>• MSE Loss</span>
+                        <span>• Huber / MSE Loss</span>
                     </div>
                     <div class="chart-canvas-box">
                         <canvas id="lossChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Chart 3: Epsilon Decay -->
+                <div class="chart-box chart-tab-pane" id="paneEpsilon" style="display: none;">
+                    <div class="chart-title-row">
+                        <strong>EPSILON (100% → 5% DECAY)</strong>
+                        <span>• Exploration ε</span>
+                    </div>
+                    <div class="chart-canvas-box">
+                        <canvas id="epsilonChart"></canvas>
                     </div>
                 </div>
             </div>
 
             <!-- D3QN Model Architecture Specs -->
             <div class="section-subhdr" style="margin-top: 0.15rem;">D3QN ARCHITECTURE SPECS</div>
-            <div class="kernel-spec-box">
-                <div class="spec-row">
+            <div class="kernel-spec-grid">
+                <div class="spec-cell">
                     <span class="spec-k">ARCHITECTURE</span>
-                    <span class="spec-v highlight-cyan">Dueling Double DQN (D3QN)</span>
+                    <span class="spec-v highlight-cyan">Dueling Double DQN</span>
                 </div>
-                <div class="spec-row">
+                <div class="spec-cell">
                     <span class="spec-k">REPLAY BUFFER</span>
-                    <span class="spec-v">100,000 Exp (Batch: 64)</span>
+                    <span class="spec-v">100k (Batch: 64)</span>
                 </div>
-                <div class="spec-row">
+                <div class="spec-cell">
                     <span class="spec-k">TARGET SYNC</span>
-                    <span class="spec-v">Soft Polyak (τ = 1e-3, γ = 0.99)</span>
+                    <span class="spec-v">Polyak (τ = 1e-3)</span>
                 </div>
-                <div class="spec-row">
+                <div class="spec-cell">
                     <span class="spec-k">OPTIMIZER</span>
-                    <span class="spec-v">Adam (lr = 5e-4, MSE Loss)</span>
+                    <span class="spec-v">Adam (lr = 5e-4)</span>
                 </div>
-                <div class="spec-row">
-                    <span class="spec-k">BENCHMARK</span>
-                    <span class="spec-v highlight-green">SOLVED (+311.16 Pts / Req >200)</span>
+                <div class="spec-cell" style="grid-column: span 2;">
+                    <div class="spec-row-inline">
+                        <span class="spec-k">BENCHMARK</span>
+                        <span class="spec-v highlight-green">SOLVED (+311.16 Pts / Req >200 🏆)</span>
+                    </div>
                 </div>
             </div>
         </aside>

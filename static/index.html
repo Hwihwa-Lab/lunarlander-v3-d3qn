@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUNAR LANDER DQN | Gymnasium Mission Control</title>
     <meta name="description" content="Real-time Dueling Double DQN Reinforcement Learning and Flight Simulation Control Deck for Lunar Lander.">
-    <link rel="stylesheet" href="static/css/style.css?v=20261102_11">
+    <link rel="stylesheet" href="static/css/style.css?v=20261102_12">
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
@@ -244,20 +244,23 @@
             </div>
 
             <!-- Interactive Convergence Oscilloscope (Tabbed) -->
-            <div class="chart-header-row">
-                <div class="section-subhdr" style="margin-bottom: 0;">CONVERGENCE CURVES</div>
-                <div class="chart-tab-group">
-                    <button class="chart-tab active" data-chart="reward">REWARD</button>
-                    <button class="chart-tab" data-chart="loss">LOSS</button>
-                    <button class="chart-tab" data-chart="epsilon">EPSILON (ε)</button>
-                </div>
+            <div class="section-subhdr" style="margin-top: 0.15rem; margin-bottom: 0.25rem;">CONVERGENCE CURVES</div>
+            <div class="chart-tab-group wide">
+                <button class="chart-tab active" data-chart="reward">REWARD</button>
+                <button class="chart-tab" data-chart="loss">LOSS</button>
+                <button class="chart-tab" data-chart="epsilon">EPSILON (ε)</button>
             </div>
             <div class="multi-charts-wrapper">
                 <!-- Chart 1: Reward & 100-MA -->
                 <div class="chart-box chart-tab-pane active" id="paneReward">
                     <div class="chart-title-row">
-                        <strong>EPISODE REWARD & 100-MA (Goal: > 200)</strong>
-                        <span>• Score • SMA 100</span>
+                        <strong class="chart-title-main">EPISODE REWARD & 100-MA</strong>
+                        <span class="chart-target-badge">GOAL: &gt; +200</span>
+                    </div>
+                    <div class="chart-legend-row">
+                        <span class="leg-item leg-cyan">● Score</span>
+                        <span class="leg-item leg-purple">● SMA 100</span>
+                        <span class="leg-item leg-green">┄ Target (200)</span>
                     </div>
                     <div class="chart-canvas-box">
                         <canvas id="rewardChart"></canvas>
@@ -267,8 +270,12 @@
                 <!-- Chart 2: MSE Loss Progression -->
                 <div class="chart-box chart-tab-pane" id="paneLoss" style="display: none;">
                     <div class="chart-title-row">
-                        <strong>MSE LOSS PROGRESSION</strong>
-                        <span>• Huber / MSE Loss</span>
+                        <strong class="chart-title-main">MSE LOSS PROGRESSION</strong>
+                        <span class="chart-target-badge">CRITERION: MSE</span>
+                    </div>
+                    <div class="chart-legend-row">
+                        <span class="leg-item leg-pink">● Huber / TD Loss</span>
+                        <span class="leg-item leg-dim">Bellman Target Error</span>
                     </div>
                     <div class="chart-canvas-box">
                         <canvas id="lossChart"></canvas>
@@ -278,8 +285,12 @@
                 <!-- Chart 3: Epsilon Decay -->
                 <div class="chart-box chart-tab-pane" id="paneEpsilon" style="display: none;">
                     <div class="chart-title-row">
-                        <strong>EPSILON (100% → 5% DECAY)</strong>
-                        <span>• Exploration ε</span>
+                        <strong class="chart-title-main">EXPLORATION SCHEDULE (ε)</strong>
+                        <span class="chart-target-badge">1.0 → 0.05</span>
+                    </div>
+                    <div class="chart-legend-row">
+                        <span class="leg-item leg-amber">● Epsilon (ε)</span>
+                        <span class="leg-item leg-dim">Exponential Decay Schedule</span>
                     </div>
                     <div class="chart-canvas-box">
                         <canvas id="epsilonChart"></canvas>

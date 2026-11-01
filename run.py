@@ -56,7 +56,7 @@ def launch_app_window(url: str):
             break
 
     temp_profile = os.path.join(tempfile.gettempdir(), "lunarlander_app_profile")
-    flags = f'--app={url} --start-maximized --window-size=1536,864 --window-position=0,0 --user-data-dir="{temp_profile}"'
+    flags = f'--app={url} --start-maximized --window-size=1536,864 --window-position=0,0 --disable-http-cache --disk-cache-size=1 --user-data-dir="{temp_profile}"'
 
     if browser_path:
         print(f"[Desktop App] Launching guaranteed maximized standalone app: {browser_path}")

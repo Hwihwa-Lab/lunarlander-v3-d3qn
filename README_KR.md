@@ -52,7 +52,6 @@ tags:
 - edge-ai
 - autonomous-agents
 - hwihwalab
-- connectailab
 - korean-ai-research
 - south-korea
 metrics:

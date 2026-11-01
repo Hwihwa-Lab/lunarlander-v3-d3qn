@@ -16,7 +16,7 @@
             <div class="brand-icon">🚀</div>
             <div class="brand-text">
                 <h1>LUNAR LANDER DQN <span class="gym-badge">Gymnasium [Box2D]</span></h1>
-                <div class="brand-sub">env.render("rgb_array") REAL-TIME SIMULATION STREAM</div>
+                <div class="brand-sub">Gymnasium Box2D Autonomous Descent & Soft Touchdown Telemetry | <span class="brand-hwihwa">HWIHWA LAB</span></div>
             </div>
         </div>
 
@@ -204,6 +204,7 @@
             </div>
 
             <!-- 4 Metrics Overview 2x2 Grid -->
+            <div class="section-subhdr">PERFORMANCE OVERVIEW</div>
             <div class="stat-cards-grid">
                 <div class="stat-metric-box">
                     <div class="s-lbl">CURRENT SCORE</div>
@@ -224,6 +225,7 @@
             </div>
 
             <!-- 3-Tier Multi Charts -->
+            <div class="section-subhdr" style="margin-top: 0.15rem;">CONVERGENCE CURVES (3-TIER)</div>
             <div class="multi-charts-wrapper">
                 <!-- Chart 1: Reward & 100-MA -->
                 <div class="chart-box">
@@ -256,6 +258,31 @@
                     <div class="chart-canvas-box">
                         <canvas id="lossChart"></canvas>
                     </div>
+                </div>
+            </div>
+
+            <!-- D3QN Model Architecture Specs -->
+            <div class="section-subhdr" style="margin-top: 0.15rem;">D3QN ARCHITECTURE SPECS</div>
+            <div class="kernel-spec-box">
+                <div class="spec-row">
+                    <span class="spec-k">ARCHITECTURE</span>
+                    <span class="spec-v highlight-cyan">Dueling Double DQN (D3QN)</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-k">REPLAY BUFFER</span>
+                    <span class="spec-v">100,000 Exp (Batch: 64)</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-k">TARGET SYNC</span>
+                    <span class="spec-v">Soft Polyak (τ = 1e-3, γ = 0.99)</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-k">OPTIMIZER</span>
+                    <span class="spec-v">Adam (lr = 5e-4, MSE Loss)</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-k">BENCHMARK</span>
+                    <span class="spec-v highlight-green">SOLVED (+311.16 Pts / Req >200)</span>
                 </div>
             </div>
         </aside>

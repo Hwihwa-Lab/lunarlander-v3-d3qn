@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUNAR LANDER DQN | Gymnasium Mission Control</title>
     <meta name="description" content="Real-time Dueling Double DQN Reinforcement Learning and Flight Simulation Control Deck for Lunar Lander.">
-    <link rel="stylesheet" href="/static/css/style.css?v=20261102_02">
+    <link rel="stylesheet" href="/static/css/style.css?v=20261102_03">
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
@@ -142,6 +142,31 @@
                         <span class="q-score" id="qScore3">0.00</span>
                     </div>
                     <div class="q-bar-track"><div class="q-bar-fill" id="qFill3"></div></div>
+                </div>
+            </div>
+
+            <!-- MISSION AVIONICS & HARDWARE SPECS -->
+            <div class="section-subhdr" style="margin-top: 0.15rem;">MISSION AVIONICS & SENSORS</div>
+            <div class="kernel-spec-box">
+                <div class="spec-row">
+                    <span class="spec-k">MAIN PROPULSION</span>
+                    <span class="spec-v highlight-green">Main Engine (Throttle 100%)</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-k">RCS ATTITUDE</span>
+                    <span class="spec-v">Dual Lateral Thrusters</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-k">TARGET PAD</span>
+                    <span class="spec-v highlight-cyan">HWIHWA Base (X: 0.0, Y: 0.0)</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-k">SAFE TOUCHDOWN</span>
+                    <span class="spec-v">|Vy| &lt; 0.4 m/s, |Vx| &lt; 0.2 m/s</span>
+                </div>
+                <div class="spec-row">
+                    <span class="spec-k">AUTONOMOUS NAV</span>
+                    <span class="spec-v highlight-green">CLOSED-LOOP D3QN ACTIVE</span>
                 </div>
             </div>
         </aside>
@@ -290,7 +315,7 @@
     </main>
 
     <!-- Scripts -->
-    <script src="/static/js/render.js?v=20261102_02"></script>
-    <script src="/static/js/app.js?v=20261102_02"></script>
+    <script src="/static/js/render.js?v=20261102_03"></script>
+    <script src="/static/js/app.js?v=20261102_03"></script>
 </body>
 </html>

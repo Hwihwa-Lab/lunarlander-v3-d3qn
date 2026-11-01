@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LUNAR LANDER DQN | Gymnasium Mission Control</title>
     <meta name="description" content="Real-time Dueling Double DQN Reinforcement Learning and Flight Simulation Control Deck for Lunar Lander.">
-    <link rel="stylesheet" href="static/css/style.css?v=20261102_10">
+    <link rel="stylesheet" href="static/css/style.css?v=20261102_11">
     <!-- Chart.js CDN -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 </head>
@@ -147,22 +147,20 @@
 
             <!-- MISSION AVIONICS & SENSORS -->
             <div class="section-subhdr" style="margin-top: 0.15rem;">MISSION AVIONICS & SENSORS</div>
-            <div class="kernel-spec-grid">
-                <div class="spec-cell">
+            <div class="avionics-card">
+                <div class="avionics-row">
                     <span class="spec-k">TARGET PAD</span>
                     <span class="spec-v highlight-cyan">Landing Pad (X:0, Y:0)</span>
                 </div>
-                <div class="spec-cell">
+                <div class="avionics-row">
                     <span class="spec-k">SAFE VEL</span>
-                    <span class="spec-v">|Vy| &lt; 0.4, |Vx| &lt; 0.2</span>
+                    <span class="spec-v">|Vy| &lt; 0.4 · |Vx| &lt; 0.2</span>
                 </div>
-                <div class="spec-cell" style="grid-column: span 2;">
-                    <div class="manual-keys-row">
-                        <span class="key-tag">🎮 MANUAL</span>
-                        <kbd class="key-badge">W</kbd> <span>MAIN</span>
-                        <kbd class="key-badge">A</kbd> <span>LEFT</span>
-                        <kbd class="key-badge">D</kbd> <span>RIGHT</span>
-                    </div>
+                <div class="manual-keys-row">
+                    <span class="key-tag">🎮 MANUAL</span>
+                    <kbd class="key-badge">W</kbd> <span>MAIN</span>
+                    <kbd class="key-badge">A</kbd> <span>LEFT</span>
+                    <kbd class="key-badge">D</kbd> <span>RIGHT</span>
                 </div>
             </div>
         </aside>

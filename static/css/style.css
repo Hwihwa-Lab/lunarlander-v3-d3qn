@@ -847,6 +847,40 @@ body {
   margin-top: 0.15rem;
 }
 
+/* Avionics & Manual Controls Card (Single-line zero-wrap layout) */
+.avionics-card {
+  background: rgba(9, 14, 26, 0.85);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  border-radius: 7px;
+  padding: 0.42rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+
+.avionics-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+
+.avionics-row .spec-k {
+  color: var(--text-dim);
+  font-weight: 600;
+  font-size: 0.66rem;
+  letter-spacing: 0.02em;
+}
+
+.avionics-row .spec-v {
+  color: #e2e8f0;
+  font-weight: 700;
+  font-size: 0.73rem;
+  white-space: nowrap;
+}
+
 .manual-keys-row {
   display: flex;
   align-items: center;

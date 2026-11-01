@@ -5,6 +5,7 @@ language:
 license: mit
 library_name: pytorch
 pipeline_tag: reinforcement-learning
+description: "LunarLander-v3 D3QN: 60FPS 인터랙티브 오실로스코프 조종석 및 정밀 항법 항공전자 시스템을 탑재한 달 착륙선 자율 하강 및 연착륙 강화학습 모델 (Hwihwa Lab)."
 tags:
 - reinforcement-learning
 - deep-reinforcement-learning

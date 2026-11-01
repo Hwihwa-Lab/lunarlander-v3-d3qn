@@ -5,6 +5,7 @@ language:
 license: mit
 library_name: pytorch
 pipeline_tag: reinforcement-learning
+description: "LunarLander-v3 D3QN: Autonomous Precision Descent & Safe Touchdown Flight Control with Interactive 60FPS Cockpit Oscilloscope and Zero-Hallucination Avionics by Hwihwa Lab."
 tags:
 - reinforcement-learning
 - deep-reinforcement-learning

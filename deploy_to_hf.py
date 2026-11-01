@@ -248,10 +248,6 @@ def deploy(repo_name: str = "lunarlander-v3-d3qn", private: bool = False, model_
     config_file = temp_dir / "config.json"
     with open(config_file, "w", encoding="utf-8") as f:
         json.dump(config_data, f, indent=2)
-        
-    readme_file = temp_dir / "README.md"
-    with open(readme_file, "w", encoding="utf-8") as f:
-        f.write(generate_model_card(repo_id))
 
     # 5. Upload files to Hugging Face Hub
     print("📤 Uploading files to Hugging Face Hub...")
@@ -264,7 +260,7 @@ def deploy(repo_name: str = "lunarlander-v3-d3qn", private: bool = False, model_
             repo_type="model",
             commit_message="Upload LunarLander D3QN best model weights"
         )
-        print("  - [1/4] Uploaded best_model.pth ✅")
+        print("  - [1/5] Uploaded best_model.pth ✅")
         
         # Upload config.json
         api.upload_file(
@@ -274,7 +270,7 @@ def deploy(repo_name: str = "lunarlander-v3-d3qn", private: bool = False, model_
             repo_type="model",
             commit_message="Upload model configuration and metadata"
         )
-        print("  - [2/4] Uploaded config.json ✅")
+        print("  - [2/5] Uploaded config.json ✅")
         
         # Upload dqn_agent.py (PyTorch architecture source)
         if os.path.exists("dqn_agent.py"):
@@ -285,17 +281,18 @@ def deploy(repo_name: str = "lunarlander-v3-d3qn", private: bool = False, model_
                 repo_type="model",
                 commit_message="Upload DQNAgent and DuelingQNetwork PyTorch architecture source"
             )
-            print("  - [3/4] Uploaded dqn_agent.py (Architecture Source) ✅")
+            print("  - [3/5] Uploaded dqn_agent.py (Architecture Source) ✅")
         
-        # Upload README.md (Global English Model Card)
-        api.upload_file(
-            path_or_fileobj=str(readme_file),
-            path_in_repo="README.md",
-            repo_id=repo_id,
-            repo_type="model",
-            commit_message="Upload comprehensive Global English Model Card README"
-        )
-        print("  - [4/5] Uploaded README.md (Global English Model Card) ✅")
+        # Upload README.md (Global English Model Card directly from root)
+        if os.path.exists("README.md"):
+            api.upload_file(
+                path_or_fileobj="README.md",
+                path_in_repo="README.md",
+                repo_id=repo_id,
+                repo_type="model",
+                commit_message="Upload comprehensive Global English Model Card README"
+            )
+            print("  - [4/5] Uploaded README.md (Global English Model Card) ✅")
 
         # Upload README_KR.md (Korean Manual)
         if os.path.exists("README_KR.md"):
@@ -307,6 +304,17 @@ def deploy(repo_name: str = "lunarlander-v3-d3qn", private: bool = False, model_
                 commit_message="Upload comprehensive Korean manual README_KR.md"
             )
             print("  - [5/5] Uploaded README_KR.md (Korean Manual) ✅")
+
+        # Upload LICENSE
+        if os.path.exists("LICENSE"):
+            api.upload_file(
+                path_or_fileobj="LICENSE",
+                path_in_repo="LICENSE",
+                repo_id=repo_id,
+                repo_type="model",
+                commit_message="Upload MIT License"
+            )
+            print("  - [Bonus] Uploaded LICENSE ✅")
         
     except Exception as e:
         print(f"❌ Upload failed: {e}")

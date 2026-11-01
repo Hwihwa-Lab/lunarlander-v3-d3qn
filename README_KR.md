@@ -1,16 +1,71 @@
-# 🚀 Lunar Lander DQN Mission Control Deck v2.0
+---
+language:
+- en
+- ko
+license: mit
+library_name: pytorch
+pipeline_tag: reinforcement-learning
+tags:
+- reinforcement-learning
+- deep-reinforcement-learning
+- dqn
+- d3qn
+- dueling-dqn
+- double-dqn
+- deep-q-network
+- lunarlander-v3
+- box2d
+- gymnasium
+- pytorch
+- robotics
+- aerospace
+- attitude-control
+- reaction-control-system
+- rcs-thruster
+- cold-gas-thrusters
+- apollo
+- lunar-module
+- soft-landing
+- touchdown
+- physical-ai
+- embodied-ai
+- simulation
+- edge-ai
+- hwihwalab
+metrics:
+- reward
+- success-rate
+model-index:
+- name: lunarlander-v3-d3qn
+  results:
+  - task:
+      type: reinforcement-learning
+      name: Reinforcement Learning
+    dataset:
+      name: Gymnasium Box2D LunarLander-v3
+      type: gymnasium/lunar-lander-v3
+    metrics:
+    - type: mean_reward
+      value: 311.16
+      name: Peak Mean Evaluation Reward
+    - type: success_rate
+      value: 100.0
+      name: Lunar Landing Success Rate
+---
 
-[![Language: English](https://img.shields.io/badge/Language-English-blue)](README.md)
-[![Language: 한국어](https://img.shields.io/badge/Language-한국어-green)](README_KR.md)
-[![Hugging Face Model Hub](https://img.shields.io/badge/🤗%20Hugging%20Face-Model%20Hub-orange)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn)
-[![GitHub Repository](https://img.shields.io/badge/GitHub-Repository-181717?style=flat&logo=github)](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn/blob/main/LICENSE)
-[![Gymnasium](https://img.shields.io/badge/Gymnasium-LunarLander--v3-darkgreen)](https://gymnasium.farama.org/environments/box2d/lunar_lander/)
-[![Algorithm](https://img.shields.io/badge/Algorithm-DQN-blue)](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
-[![PyTorch](https://img.shields.io/badge/PyTorch-D3QN-red)](https://pytorch.org)
+# 🚀 LunarLander-v3 D3QN // Mission Control Deck v2.0
 
-> **Gymnasium Box2D `LunarLander-v3` 강화학습 관제 덱 & 실시간 항공우주 텔레메트리 대시보드**  
-> *[ 🌐 English Documentation ](README.md) | [ 🇰🇷 한국어 매뉴얼 ](README_KR.md)*
+[![Language: English](https://img.shields.io/badge/Language-English-007ACC)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![Language: 한국어](https://img.shields.io/badge/Language-한국어-7cb342)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn/blob/main/README_KR.md) [![Hugging Face Model Hub](https://img.shields.io/badge/🤗%20Model%20Hub-LunarLander--D3QN-orange)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![🏎️ 후속 연구: Roadster D3QN](https://img.shields.io/badge/진화모델-Roadster%20D3QN-purple)](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn) [![🎯 후속 연구: Roadster PPO](https://img.shields.io/badge/진화모델-Roadster%20PPO-orange)](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-ppo) [![GitHub](https://img.shields.io/badge/GitHub-Hwihwa--Lab-181717?logo=github)](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn/blob/main/LICENSE)
+
+[![PyTorch](https://img.shields.io/badge/PyTorch-D3QN-red)](https://pytorch.org) [![Gymnasium](https://img.shields.io/badge/Gymnasium-v1.0-darkgreen)](https://gymnasium.farama.org/environments/box2d/lunar_lander/) [![Benchmark](https://img.shields.io/badge/공식성공점수-%2B311.16점%20(기준%20압도적%20초과)-10B981)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![Aerodynamics](https://img.shields.io/badge/물리역학-6--DoF%20달중력%20%26%20RCS-E11D48)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![Telemetry](https://img.shields.io/badge/텔레메트리-실시간%20웹소켓%2050Hz-06B6D4)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) [![Research Lab](https://img.shields.io/badge/연구개발-Hwihwa%20Lab-d0f991?labelColor=050807)](https://github.com/Hwihwa-Lab)
+
+> “**LunarLander-v3 D3QN // Mission Control: 달 표면 자율 연착륙 & 항공우주 텔레메트리 HUD | HWIHWA LAB**  
+> Dueling Double Deep Q-Network(D3QN) 신경망과 냉가스 RCS 스러스터 역학을 활용한 초정밀 자세 안정화, 수직 낙하 속도 감쇄 및 달 착륙 깃발 사이 완벽 소프트 랜딩.  
+>  
+> 🏛️ **원천 연구 베이스라인 (Foundational Baseline)**: 본 프로젝트는 Hwihwa Lab의 상위 항공우주 제어 연구인 [테슬라 로드스터 180° 공중 전복 복구 플립 착륙 (D3QN & PPO)](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn)의 핵심 알고리즘 및 물리적 모태가 되는 원천 연구입니다.  
+>  
+> 🌐 [English Documentation](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) | 🇰🇷 [한국어 매뉴얼](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn/blob/main/README_KR.md) | 🏎️ [Roadster D3QN](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn) | 🎯 [Roadster PPO](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-ppo)”  
+> *Developed by [Hwihwa Lab](https://github.com/Hwihwa-Lab) · AI × Automation × Aesthetics ✨*
 
 세련되고 안정적인("간지나는") 착륙을 위한 **Dueling Double DQN (D3QN)** 강화학습 시스템 및 원스크린(One-Screen) 3단 항공우주 관제 덱입니다.
 
@@ -134,15 +189,33 @@ python deploy_to_hf.py
 
 ---
 
-## 📦 오픈소스 저장소 & 모델 허브
-- **GitHub Repository**: [https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn)
-- **Hugging Face Model**: [https://huggingface.co/hwihwalab/lunarlander-v3-d3qn](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn)
+## 👤 Hwihwa Lab 소개 (About Hwihwa Lab)
+
+> **“AI × Automation × Aesthetics — Crafting tools you'll love ✨”**  
+> 휘화랩(Hwihwa Lab)은 온디바이스 인공지능, 자율 운영 에이전트, 그리고 세련된 인터랙티브 미학을 융합하는 1인 독립 AI 연구소입니다. 반복적이고 소모적인 운영 부담을 덜어냄으로써 솔로프리너와 창작자가 본질적인 창작과 비즈니스의 즐거움에 집중할 수 있는 견고한 시스템을 설계합니다.
+
+### 🔬 핵심 연구 및 엔지니어링 영역
+- **Zero-Cost Edge Operations**: 지속적인 클라우드 API 비용 없는 완전 독립 온디바이스 AI 파이프라인 구축.
+- **Autonomous Decision OS & Micro-ERP**: 일상적인 운영 결정과 프로세스를 체계적으로 조율하는 전두엽 스타일의 결정 지능 아키텍처.
+- **Embodied AI & Domain-Specific Robotics**: 시뮬레이션 기반 강화학습(RL), 물리적 기동 제어 두뇌 및 실세계 서비스 환경을 위한 특화 데이터 엔지니어링.
+- **Interactive Creative Aesthetics**: 기능적 자동화에 정교한 비주얼 크래프트와 현대적 디자인 철학을 결합한 매력적인 도구 제작.
+
+### 🌐 공식 채널 & 항공우주 강화학습(Aerospace RL) 연구 계보
+- **Research Studio**: [🤗 Hugging Face (@hwihwalab)](https://huggingface.co/hwihwalab) · [🐙 GitHub (@Hwihwa-Lab)](https://github.com/Hwihwa-Lab)
+- **🚀 자율 비행 & 착륙 제어 연구 라인업**:
+  - 🌕 **Phase 1 · 클래식 달 표면 연착륙 (본 모델 / 원천 베이스라인)**: **lunarlander-v3-d3qn** (*수직 중력 낙하 감속 및 자세 제어의 핵심 D3QN 원형*)
+  - 🏎️ **Phase 2 · 공중 180° 전복 반전 복구 (D3QN)**: [tesla-roadster-flip-landing-d3qn](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn) (*신중한 가치 기반 제어로 100% 무결점 착륙 달성*)
+  - 🎯 **Phase 2 · 초고속 탄도 반전 복구 (PPO)**: [tesla-roadster-flip-landing-ppo](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-ppo) (*53% 빠른 애자일 기동으로 98% 연착륙 달성*)
+  - 🛸 **듀얼 엔진 실시간 3D 콕핏**: [tesla-roadster-flip-landing](https://huggingface.co/spaces/hwihwalab/tesla-roadster-flip-landing) (*웹 브라우저 60fps 텔레메트리 관제 덱*)
 
 ---
 
-## 📄 라이선스
-본 프로젝트는 [MIT License](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn/blob/main/LICENSE)를 따릅니다.
+## 📄 라이선스 (License)
+본 프로젝트는 MIT 라이선스에 따라 자유롭게 사용 및 수정할 수 있습니다. 자세한 내용은 [LICENSE](https://github.com/Hwihwa-Lab/lunarlander-v3-d3qn/blob/main/LICENSE) 파일을 참조하십시오.
 
 ---
 
-*Trained and deployed with [LunarLander Mission Control](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) by **hwihwalab**.*
+<p align="center">
+  <em>Crafted with precision and pride by <strong><a href="https://github.com/Hwihwa-Lab">Hwihwa Lab</a></strong></em><br>
+  <strong>AI × Automation × Aesthetics ✨</strong>
+</p>

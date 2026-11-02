@@ -64,6 +64,39 @@
             };
         }
 
+        renderInitialFrame() {
+            if (!this.trajectories || this.trajectories.length === 0) return;
+            const ep = this.trajectories[0];
+            const f = ep.frames && ep.frames.length > 0 ? ep.frames[0] : null;
+            if (f && this.onTelemetry) {
+                this.onTelemetry({
+                    type: "telemetry",
+                    mode: this.mode,
+                    episode: this.currentEpisode,
+                    step: 0,
+                    x: f.x,
+                    y: f.y,
+                    vx: f.vx,
+                    vy: f.vy,
+                    angle: f.angle,
+                    pitch_angle: f.pitch_angle || (f.angle * (180 / Math.PI)),
+                    angular_vel: f.angular_vel || 0,
+                    left_leg: false,
+                    right_leg: false,
+                    action: 0,
+                    current_score: 0.0,
+                    raw_reward: 0.0,
+                    shaped_reward: 0.0,
+                    q_values: f.q_values || [0, 0, 0, 0],
+                    epsilon: 0.0,
+                    loss: 0.002,
+                    done: false,
+                    success: false,
+                    status_text: "STANDBY // READY FOR TOUCHDOWN"
+                });
+            }
+        }
+
         start() {
             if (this.isRunning && !this.isPaused) return;
             this.isRunning = true;

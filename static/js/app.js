@@ -210,7 +210,11 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         updateStatsUI(localSim.getSummaryStats());
-        localSim.start(); // Auto-start continuous Autopilot demo
+        if (simStatusBadge) simStatusBadge.textContent = 'STANDBY // READY';
+        if (btnStart) btnStart.classList.add('standby-pulse');
+        if (typeof localSim.renderInitialFrame === 'function') {
+            localSim.renderInitialFrame();
+        }
     }
 
     function connectWebSocket() {
@@ -239,7 +243,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 isLocalSimActive = false;
                 connectionDot.style.background = 'var(--neon-green)';
                 connectionText.textContent = 'GYM SIMULATION CONNECTED';
-                console.log('[WebSocket] Connected.');
+                if (simStatusBadge) simStatusBadge.textContent = 'STANDBY // READY';
+                if (btnStart) btnStart.classList.add('standby-pulse');
+                console.log('[WebSocket] Connected. Ready in Standby.');
             };
 
             socket.onmessage = (event) => {
@@ -529,16 +535,34 @@ document.addEventListener('DOMContentLoaded', () => {
     // 7. Interactive Buttons & Mode Selectors
     // =========================================================================
     btnStart.addEventListener('click', () => {
+        if (btnStart) {
+            btnStart.classList.remove('standby-pulse');
+            btnStart.classList.add('active');
+        }
+        if (btnPause) btnPause.classList.remove('active');
+        if (simStatusBadge) simStatusBadge.textContent = 'IN FLIGHT';
         sendCommand('start');
     });
 
     btnPause.addEventListener('click', () => {
+        if (btnStart) btnStart.classList.remove('active');
+        if (btnPause) btnPause.classList.add('active');
+        if (simStatusBadge) simStatusBadge.textContent = 'PAUSED';
         sendCommand('pause');
     });
 
     btnReset.addEventListener('click', () => {
         if (confirm('Are you sure you want to reset all training metrics and neural network weights?')) {
             sendCommand('reset');
+            if (btnStart) {
+                btnStart.classList.remove('active');
+                btnStart.classList.add('standby-pulse');
+            }
+            if (btnPause) btnPause.classList.remove('active');
+            if (simStatusBadge) simStatusBadge.textContent = 'STANDBY // READY';
+            if (isLocalSimActive && localSim && typeof localSim.renderInitialFrame === 'function') {
+                localSim.renderInitialFrame();
+            }
         }
     });
 

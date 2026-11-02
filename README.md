@@ -85,7 +85,8 @@ model-index:
 > “**LunarLander-v3 D3QN // Mission Control: Autonomous Lunar Soft Landing & Aerospace Telemetry HUD | HWIHWA LAB**  
 > High-precision attitude stabilization, vertical velocity damping, and soft touchdown between lunar landing flags using Dueling Double Deep Q-Network (D3QN) and cold-gas RCS thruster physics.  
 >  
-> 🏛️ **Foundational Research Baseline**: This project establishes the core algorithmic and mathematical foundation for Hwihwa Lab's advanced Tesla Roadster 180° Inversion Flip-Landing Study ([🏎️ D3QN](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn) & [🎯 PPO](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-ppo)).  
+> 🏛️ **Foundational Research Baseline**: This project establishes the core algorithmic and mathematical foundation for Hwihwa Lab's advanced Tesla Roadster 180° Inversion Flip-Landing Study  
+> ([🏎️ D3QN](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn) & [🎯 PPO](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-ppo)).  
 >  
 > 🌐 [English Documentation](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) | 🇰🇷 [한국어 매뉴얼](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn/blob/main/README_KR.md) | 🚀 [Live Mission Control Space](https://huggingface.co/spaces/hwihwalab/lunarlander-v3-d3qn)”  
 > *Developed by [Hwihwa Lab](https://github.com/Hwihwa-Lab) · AI × Automation × Aesthetics ✨*

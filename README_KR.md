@@ -85,9 +85,9 @@ model-index:
 > “**LunarLander-v3 D3QN // Mission Control: 달 표면 자율 연착륙 & 항공우주 텔레메트리 HUD | HWIHWA LAB**  
 > Dueling Double Deep Q-Network(D3QN) 신경망과 냉가스 RCS 스러스터 역학을 활용한 초정밀 자세 안정화, 수직 낙하 속도 감쇄 및 달 착륙 깃발 사이 완벽 소프트 랜딩.  
 >  
-> 🏛️ **원천 연구 베이스라인 (Foundational Baseline)**: 본 프로젝트는 Hwihwa Lab의 상위 항공우주 제어 연구인 [테슬라 로드스터 180° 공중 전복 복구 플립 착륙 (D3QN & PPO)](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn)의 핵심 알고리즘 및 물리적 모태가 되는 원천 연구입니다.  
+> 🏛️ **원천 연구 베이스라인 (Foundational Baseline)**: 본 프로젝트는 Hwihwa Lab의 상위 항공우주 제어 연구인 테슬라 로드스터 180° 공중 전복 복구 플립 착륙 ([🏎️ D3QN](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn) & [🎯 PPO](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-ppo))의 핵심 알고리즘 및 물리적 모태가 되는 원천 연구입니다.  
 >  
-> 🌐 [실시간 라이브 관제덱 (Space)](https://huggingface.co/spaces/hwihwalab/lunarlander-v3-d3qn) | 📦 [Model Hub (가중치)](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) | 🇰🇷 [한국어 매뉴얼](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn/blob/main/README_KR.md) | 🏎️ [Roadster D3QN](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-d3qn) | 🎯 [Roadster PPO](https://huggingface.co/hwihwalab/tesla-roadster-flip-landing-ppo)”  
+> 🌐 [English Documentation](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn) | 🇰🇷 [한국어 매뉴얼](https://huggingface.co/hwihwalab/lunarlander-v3-d3qn/blob/main/README_KR.md) | 🚀 [실시간 라이브 관제덱 (Space)](https://huggingface.co/spaces/hwihwalab/lunarlander-v3-d3qn)”  
 > *Developed by [Hwihwa Lab](https://github.com/Hwihwa-Lab) · AI × Automation × Aesthetics ✨*
 
 세련되고 안정적인("간지나는") 착륙을 위한 **Dueling Double DQN (D3QN)** 강화학습 시스템 및 원스크린(One-Screen) 3단 항공우주 관제 덱입니다.
